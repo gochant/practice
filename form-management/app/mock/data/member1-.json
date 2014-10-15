@@ -1,0 +1,15 @@
+[{
+	"id": 1,
+	"visit_id":1,
+	"name":"张三",
+	"gender":"男", 
+    "department": "计算机学院",
+	"position":"院长"
+    }, {
+	"id": 1,
+	"visit_id":1,
+	"name":"张三",
+	"gender":"男", 
+    "department": "计算机学院",
+	"position":"院长"
+}]

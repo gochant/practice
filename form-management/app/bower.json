@@ -1,0 +1,18 @@
+{
+  "name": "form-app",
+  "version": "0.1.0",
+  "main": "js/app.js",
+  "dependencies": {
+    "jquery": "latest",
+    "underscore": "latest",
+    "angular": "latest",
+	"angular-resource":"latest", 
+	"angular-route":"latest", 
+	"ng-table":"latest", 
+    "requirejs": "latest",
+    "requirejs-text": "latest",
+	"bootstrap":"latest",
+	"jasmine":"latest",
+	"angular-ui-bootstrap-bower":"latest" 
+  }
+}

@@ -1,0 +1,250 @@
+<?xml version="1.0"?>
+<Global xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Areas>
+    <Area Name="Asia" CName="亚洲">
+      <Countrys>
+        <Country Name=" China " CName="中国" />
+        <Country Name=" Mongolia " CName="蒙古" />
+        <Country Name=" North Korea " CName="朝鲜" />
+        <Country Name=" South Korea " CName="韩国" />
+        <Country Name="Japan" CName="日本" />
+        <Country Name="Philippines" CName="菲律宾" />
+        <Country Name="Vietnam" CName="越南" />
+        <Country Name="Laos" CName="老挝" />
+        <Country Name="Cambodia" CName="柬埔寨" />
+        <Country Name="Myanmar" CName="缅甸" />
+        <Country Name="Thailand" CName="泰国" />
+        <Country Name="Malaysia" CName="马来西亚" />
+        <Country Name="Brunei" CName="文莱" />
+        <Country Name="Singapore" CName="新加坡" />
+        <Country Name="Indonesia" CName="印度尼西亚" />
+        <Country Name="East Timor" CName="东帝汶" />
+        <Country Name="Nepal" CName="尼泊尔" />
+        <Country Name="Bhutan" CName="不丹" />
+        <Country Name="Bangladesh" CName="孟加拉国" />
+        <Country Name="India" CName="印度" />
+        <Country Name="Pakistan" CName="巴基斯坦" />
+        <Country Name="Sri Lanka" CName="斯里兰卡" />
+        <Country Name="Maldives" CName="马尔代夫" />
+        <Country Name="Kazakhstan" CName="哈萨克斯坦" />
+        <Country Name="Kyrgyzstan" CName="吉尔吉斯斯坦" />
+        <Country Name="Tajikistan" CName="塔吉克斯坦" />
+        <Country Name="Uzbekistan" CName="乌兹别克斯坦" />
+        <Country Name="Turkmenistan" CName="土库曼斯坦" />
+        <Country Name="Afghanistan" CName="阿富汗" />
+        <Country Name="Iraq" CName="伊拉克" />
+        <Country Name="Iran" CName="伊朗" />
+        <Country Name="Syria" CName="叙利亚" />
+        <Country Name="Jordan" CName="约旦" />
+        <Country Name="Lebanon" CName="黎巴嫩" />
+        <Country Name="Israel" CName="以色列" />
+        <Country Name="Palestine" CName="巴勒斯坦" />
+        <Country Name="Saudi Arabia" CName="沙特阿拉伯" />
+        <Country Name="Bahrain" CName="巴林" />
+        <Country Name="Qatar" CName="卡塔尔" />
+        <Country Name="Kuwait" CName="科威特" />
+        <Country Name="United Arab Emirates (UAE)" CName="阿拉伯联合酋长国（阿联酋）" />
+        <Country Name="Oman" CName="阿曼" />
+        <Country Name="Yemen" CName="也门" />
+        <Country Name="Georgia" CName="格鲁吉亚" />
+        <Country Name="Armenia" CName="亚美尼亚" />
+        <Country Name="Azerbaijan" CName="阿塞拜疆" />
+        <Country Name="Turkey" CName="土耳其" />
+        <Country Name="Cyprus" CName="塞浦路斯" />
+      </Countrys>
+    </Area>
+    <Area Name="Europe" CName="欧洲">
+      <Countrys>
+        <Country Name="Finnish" CName="芬兰" />
+        <Country Name="Sweden" CName="瑞典" />
+        <Country Name="Norwegian" CName="挪威" />
+        <Country Name="Icelandic" CName="冰岛" />
+        <Country Name="Danish Faroe Islands" CName="丹麦" />
+        <Country Name="Estonia" CName="法罗群岛（丹）" />
+        <Country Name="Latvia" CName="爱沙尼亚" />
+        <Country Name="Lithuania" CName="拉脱维亚" />
+        <Country Name="Belorussia" CName="立陶宛" />
+        <Country Name="Russia" CName="白俄罗斯" />
+        <Country Name="Ukraine" CName="俄罗斯" />
+        <Country Name="Moldova" CName="乌克兰" />
+        <Country Name="Poland" CName="摩尔多瓦" />
+        <Country Name="Czechoslovakia" CName="波兰" />
+        <Country Name="Slovakia" CName="捷克" />
+        <Country Name="Hungary" CName="斯洛伐克" />
+        <Country Name="Germany" CName="匈牙利" />
+        <Country Name="Austria" CName="德国" />
+        <Country Name="Switzerland" CName="奥地利" />
+        <Country Name="Liechtenstein" CName="瑞士" />
+        <Country Name="United Kingdom" CName="列支敦士登" />
+        <Country Name="Ireland" CName="英国" />
+        <Country Name="the Netherlands" CName="爱尔兰" />
+        <Country Name="Belgium" CName="荷兰" />
+        <Country Name="Luxembourg" CName="比利时" />
+        <Country Name="France" CName="卢森堡" />
+        <Country Name="Monaco" CName="法国" />
+        <Country Name="Romania" CName="摩纳哥" />
+        <Country Name="Bulgaria" CName="罗马尼亚" />
+        <Country Name="Serbia" CName="保加利亚" />
+        <Country Name="Macedonia" CName="塞尔维亚" />
+        <Country Name="Albania" CName="马其顿" />
+        <Country Name="Greece" CName="阿尔巴尼亚" />
+        <Country Name="the Slovenia" CName="希腊" />
+        <Country Name="Croatia" CName="斯洛文尼亚" />
+        <Country Name="Bosnia and the ink fill elder brother Uygur that Italy" CName="克罗地亚" />
+        <Country Name="the Vatican" CName="波斯尼亚和墨塞哥维那" />
+        <Country Name="San Marino" CName="意大利" />
+        <Country Name="Malta" CName="梵蒂冈" />
+        <Country Name="Spain" CName="圣马力诺" />
+        <Country Name="Portugal" CName="马耳他" />
+        <Country Name="Andorra" CName="西班牙" />
+      </Countrys>
+    </Area>
+    <Area Name="Africa" CName="非洲">
+      <Countrys>
+        <Country Name="Egypt" CName="埃及" />
+        <Country Name="Libya" CName="利比亚" />
+        <Country Name="Sudan" CName="苏丹" />
+        <Country Name="Tunisia" CName="突尼斯" />
+        <Country Name="Algeria" CName="阿尔及利亚" />
+        <Country Name="Morocco" CName="摩洛哥" />
+        <Country Name="Azores (Portugal)" CName="亚速尔群岛（葡）" />
+        <Country Name="Madeira Islands (Portugal)" CName="马德拉群岛（葡）" />
+        <Country Name="Ethiopia" CName="埃塞俄比亚" />
+        <Country Name="Eritrea" CName="厄立特里亚" />
+        <Country Name="Somalia" CName="索马里" />
+        <Country Name="Djibouti" CName="吉布提" />
+        <Country Name="Kenya" CName="肯尼亚" />
+        <Country Name="Tanzania" CName="坦桑尼亚" />
+        <Country Name="Uganda" CName="乌干达" />
+        <Country Name="Rwanda" CName="卢旺达" />
+        <Country Name="Burundi" CName="布隆迪" />
+        <Country Name="Seychelles" CName="塞舌尔" />
+        <Country Name="Chad" CName="乍得" />
+        <Country Name="Central Africa" CName="中非" />
+        <Country Name="Cameroon" CName="喀麦隆" />
+        <Country Name="Equatorial Guinea" CName="赤道几内亚" />
+        <Country Name="Gabonese" CName="加蓬" />
+        <Country Name="The Republic of Congo (i.e.: Congo (cloth))" CName="刚果共和国" />
+        <Country Name="The Democratic Republic of Congo (i.e.: Congo (gold))" CName="刚果民主共和国" />
+        <Country Name="Sao Tome and Principe" CName="圣多美及普林西比" />
+        <Country Name="Mauritania" CName="毛里塔尼亚" />
+        <Country Name="Western Sahara (Note: not an independent" CName="西撒哈拉" />
+        <Country Name="Senegal" CName="塞内加尔" />
+        <Country Name="Gambia" CName="冈比亚" />
+        <Country Name="Mali" CName="马里" />
+        <Country Name="Burkina Faso" CName="布基纳法索" />
+        <Country Name="Guinea" CName="几内亚" />
+        <Country Name="Guinea-Bissau" CName="几内亚比绍" />
+        <Country Name="Cape Verde" CName="佛得角" />
+        <Country Name="Sierra Leone" CName="塞拉利昂" />
+        <Country Name="Liberia" CName="利比里亚" />
+        <Country Name="Côte d'Ivoire" CName="科特迪瓦" />
+        <Country Name="Ghana" CName="加纳" />
+        <Country Name="Togo" CName="多哥" />
+        <Country Name="Tony Ning" CName="贝宁" />
+        <Country Name="Niger" CName="尼日尔" />
+        <Country Name="Canary Islands (West)" CName="加那利群岛（西）" />
+        <Country Name="Zambia" CName="赞比亚" />
+        <Country Name="Angola" CName="安哥拉" />
+        <Country Name="Zimbabwe" CName="津巴布韦" />
+        <Country Name="Malawi" CName="马拉维" />
+        <Country Name="Mozambique" CName="莫桑比克" />
+        <Country Name="Botswana" CName="博茨瓦纳" />
+        <Country Name="Namibia" CName="纳米比亚" />
+        <Country Name="South Africa" CName="南非" />
+        <Country Name="Swaziland" CName="斯威士兰" />
+        <Country Name="Lesotho" CName="莱索托" />
+        <Country Name="Madagascar" CName="马达加斯加" />
+        <Country Name="Comoro" CName="科摩罗" />
+        <Country Name="Mauritius" CName="毛里求斯" />
+        <Country Name="Liuniwang (law)" CName="留尼旺（法）" />
+        <Country Name="the Saint heller take (UK)" CName="圣赫勒拿（英）" />
+      </Countrys>
+    </Area>
+    <Area Name="Oceania" CName="大洋洲">
+      <Countrys>
+        <Country Name="Australian" CName="澳大利亚" />
+        <Country Name="New Zealand" CName="新西兰" />
+        <Country Name="Papua New Guinean" CName="巴布亚新几内亚" />
+        <Country Name="the Solomon Islands" CName="所罗门群岛" />
+        <Country Name="Vanuatu" CName="瓦努阿图" />
+        <Country Name="Micronesia" CName="密克罗尼西亚" />
+        <Country Name="Marshall islands" CName="马绍尔群岛" />
+        <Country Name="the handkerchief fatigue" CName="帕劳" />
+        <Country Name="the nauru" CName="瑙鲁" />
+        <Country Name="Kiribati" CName="基里巴斯" />
+        <Country Name="the Tuvalu" CName="图瓦卢" />
+        <Country Name="Samoan" CName="萨摩亚" />
+        <Country Name="the Fijian archipelago" CName="斐济群岛" />
+        <Country Name="Tonga" CName="汤加" />
+        <Country Name="Cook Islands (new)" CName="库克群岛（新）" />
+        <Country Name="Guam (US)" CName="关岛（美）" />
+        <Country Name="New Caledoni (law)" CName="新喀里多尼亚（法）" />
+        <Country Name="French Polynesian" CName="法属波利尼西亚" />
+        <Country Name="the pitcairn island (UK)" CName="皮特凯恩岛（英）" />
+        <Country Name="Wallis and the rich chart accept (law) (newly)" CName="瓦利斯与富图纳（法）" />
+        <Country Name="Niue" CName="纽埃（新）" />
+        <Country Name="Tokelau (new)" CName="托克劳（新）" />
+        <Country Name="US are Samoa" CName="美属萨摩亚" />
+        <Country Name="north Maliyana (US)" CName="北马里亚纳（美）" />
+      </Countrys>
+    </Area>
+    <Area Name="North America" CName="北美洲">
+      <Countrys>
+        <Country Name="Canada" CName="加拿大" />
+        <Country Name="the United States" CName="美国" />
+        <Country Name="Mexico" CName="墨西哥" />
+        <Country Name="Greenland (Denmark)" CName="格陵兰（丹）" />
+        <Country Name="Guatemala" CName="危地马拉" />
+        <Country Name="Belize" CName="伯利兹" />
+        <Country Name="El Salvador" CName="萨尔瓦多" />
+        <Country Name="Honduras" CName="洪都拉斯" />
+        <Country Name="Nicaragua" CName="尼加拉瓜" />
+        <Country Name="Costa Rica" CName="哥斯达黎加" />
+        <Country Name="Panama" CName="巴拿马" />
+        <Country Name="Bahamas" CName="巴哈马" />
+        <Country Name="Cuba" CName="古巴" />
+        <Country Name="Jamaica" CName="牙买加" />
+        <Country Name="Haiti" CName="海地" />
+        <Country Name="the Dominican Republic" CName="多米尼加共和国" />
+        <Country Name="Antigua and Barbuda" CName="安提瓜和巴布达" />
+        <Country Name="Saint Kitts and Nevis" CName="圣基茨和尼维斯" />
+        <Country Name="Dominica" CName="多米尼克" />
+        <Country Name="Saint Lucia" CName="圣卢西亚" />
+        <Country Name="Saint Vincent and the Grenadines" CName="圣文森特和格林纳丁斯" />
+        <Country Name="Grenada" CName="格林纳达" />
+        <Country Name="Barbados" CName="巴巴多斯" />
+        <Country Name="particularly Trinidad and Tobago" CName="特立尼达和多巴哥" />
+        <Country Name="Puerto Rico (U.S.)" CName="波多黎各（美）" />
+        <Country Name="British Virgin Islands" CName="英属维尔京群岛" />
+        <Country Name="U.S. Virgin Islands" CName="美属维尔京群岛" />
+        <Country Name="Anguilla (United Kingdom)" CName="安圭拉（英）" />
+        <Country Name="Montserrat (United Kingdom)" CName="蒙特塞拉特（英）" />
+        <Country Name="Guadeloupe (France)" CName="瓜德罗普（法）" />
+        <Country Name="Martinique ( France)" CName="马提尼克（法）" />
+        <Country Name="Netherlands Antilles" CName="荷属安的列斯" />
+        <Country Name="Aruba (Netherlands)" CName="阿鲁巴（荷）" />
+        <Country Name="Turks and Caicos Islands (United Kingdom)" CName="特克斯和凯科斯群岛（英）" />
+        <Country Name="Cayman Islands (British)" CName="开曼群岛（英）" />
+        <Country Name="Bermuda (United Kingdom)" CName="百慕大（英）" />
+      </Countrys>
+    </Area>
+    <Area Name="South America" CName="南美洲">
+      <Countrys>
+        <Country Name="Colombia" CName="哥伦比亚" />
+        <Country Name="Venezuela" CName="委内瑞拉" />
+        <Country Name="Guyana" CName="圭亚那" />
+        <Country Name="French Guiana" CName="法属圭亚那" />
+        <Country Name="Surinam" CName="苏里南" />
+        <Country Name="Ecuador" CName="厄瓜多尔" />
+        <Country Name="Peru" CName="秘鲁" />
+        <Country Name="Bolivia" CName="玻利维亚" />
+        <Country Name="Brazil" CName="巴西" />
+        <Country Name="Chile" CName="智利" />
+        <Country Name="Argentina" CName="阿根廷" />
+        <Country Name="Uruguay" CName="乌拉圭" />
+        <Country Name="Paraguay" CName="巴拉圭" />
+      </Countrys>
+    </Area>
+  </Areas>
+</Global>

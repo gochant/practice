@@ -1,0 +1,211 @@
+<div id="content-body" ng-controller="personDetailCtrl">
+    <div class="sub-header clearfix">
+        <h2 class="pull-left">{{person.First}}{{person.Last}}
+        <small>{{person.FirstSpell}} {{person.LastSpell}}</small>
+        </h2>
+        <span class="label" ng-class="{ 'label-success': tag === 2, 'label-info': tag === 1, 'label-warning': tag === 3}">{{tags[tag]}}</span>
+        <ul class="nav nav-pills pull-right" ngsl-tab>
+            <li><a href="#tb-detail">人员详情</a></li>
+            <li><a href="#tb-relatived">家庭关系</a></li>
+            <li><a href="#tb-record">出访记录</a></li>
+        </ul>
+    </div>
+    <div class="toolbar">
+        <button ng-click="reset()" class="btn btn-lg btn-default btn-plain">
+            <i class="icon-reply"></i>
+            重置
+        </button>
+        <button ng-click="update(person)" class="btn btn-lg btn-primary btn-plain">
+            <i class="icon-ok"></i>
+            提交
+        </button>
+    </div>
+    <div class="tab-content">
+        <div id="tb-detail" class="tab-pane">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <span class="icon"><i class="fa fa-th"></i></span>
+                            <h5 class="panel-title">基本信息</h5>
+                        </div>
+                        <div class="panel-body nopadding">
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label class="col-md-1 control-label">姓</label>
+                                    <div class="col-md-2">
+                                        <input type="text" ng-model="person.First" class="form-control">
+                                    </div>
+                                    <label class="col-md-1 control-label">名</label>
+                                    <div class="col-md-2">
+                                        <input type="text" ng-model="person.Last" class="form-control">
+                                    </div>
+                                    <label class="col-md-1 control-label" title="名拼音">姓（E）</label>
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control" ng-model="person.FirstSpell">
+                                    </div>
+                                    <label class="col-md-1 control-label" title="名拼音">名（E）</label>
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control" ng-model="person.LastSpell">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-1 control-label">证件类型</label>
+                                    <div class="col-md-2">
+                                        <select class="form-control" ng-model="person.CertType" ng-options="c.key as c.value for c in certTypes">
+                                        </select>
+                                    </div>
+                                    <label class="col-md-2 control-label">证件号码</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" ng-model="person.CertNumber">
+                                    </div>
+                                    <label class="col-md-2 control-label">健康状况</label>
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control" ng-model="person.Health">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-1 control-label">性别</label>
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control" ng-model="person.Health">
+                                    </div>
+                                    <label class="col-md-2 control-label">出生日期</label>
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control" ng-model="person.Birthdate">
+                                    </div>
+                                    <label class="col-md-3 control-label">年龄</label>
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control" ng-model="person.Age">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-1 control-label">出生地</label>
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control" ng-model="person.BirthPlace">
+                                    </div>
+                                    <label class="col-md-2 control-label">户口所在地</label>
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control" ng-model="person.RegisterPlace">
+                                    </div>
+                                    <label class="col-md-3 control-label">是否外籍国籍</label>
+                                    <div class="col-md-2">
+                                        <input type="checkbox" class="form-control" ng-model="person.IsForeign">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-1 control-label">居住地</label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" ng-model="person.ResidencePlace">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <span class="icon"><i class="icon-th"></i></span>
+                            <h5 class="panel-title">工作信息</h5>
+                        </div>
+                        <div class="panel-body nopadding">
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label class="col-md-1 control-label">工作单位</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" ng-model="person.WorkUnit">
+                                    </div>
+                                    <label class="col-md-1 control-label">部门</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" ng-model="person.Department">
+                                    </div>
+                                    <label class="col-md-1 control-label">职务</label>
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control" ng-model="person.Title">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-1 control-label">职业属性</label>
+                                    <div class="col-md-2">
+                                        <select class="form-control" ng-model="person.ProfessionAttr" ng-options="c.key as c.value for c in professionAttrs">
+                                        </select>
+                                    </div>
+                                    <label class="col-md-2 control-label">行政级别</label>
+                                    <div class="col-md-2">
+                                        <select class="form-control" ng-model="person.AdminLevel" ng-options="c.key as c.value for c in adminLevels">
+                                        </select>
+                                    </div>
+                                    <label class="col-md-2 control-label">政治面貌</label>
+                                    <div class="col-md-2">
+                                        <select class="form-control" ng-model="person.PoliticalStatus" ng-options="c.key as c.value for c in politicalStatus">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-1 control-label">人员属性</label>
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control" ng-model="person.Property">
+                                    </div>
+
+                                    <label class="col-md-2 control-label">是否涉密人员</label>
+                                    <div class="col-md-2">
+                                        <input type="checkbox" class="form-control" ng-model="person.IsSecretRelated">
+                                    </div>
+                                    <label class="col-md-2 control-label">涉密等级</label>
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control" ng-model="person.SecretLevel">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="tb-relatived" class="tab-pane">
+            <div class="row" ng-controller="personMemberCtrl">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <span class="icon"><i class="icon-th"></i></span>
+                            <h5 class="panel-title">家庭成员</h5>
+                            <div class="buttons">
+                                <a class="btn btn-primary btn-xs" ng-click="addMember()"><i class="icon-plus"></i>
+                                    添加新成员
+                                </a>
+                            </div>
+                        </div>
+                        <div class="panel-body nopadding">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>称谓</th>
+                                        <th>姓名</th>
+                                        <th>年龄</th>
+                                        <th>政治面貌</th>
+                                        <th>工作单位、职务及居住地</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="tb-record" class="tab-pane">
+            出访记录
+        </div>
+    </div>
+</div>

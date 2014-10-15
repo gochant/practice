@@ -1,0 +1,380 @@
+<div id="content-header">
+    <div id="breadcrumb">
+        <a href="#"><i class="icon-home"></i>首页</a>
+        <a href="#/visit">出访列表</a>
+        <a href="javascript:;" class="current">出访详情</a>
+    </div>
+</div>
+<div id="content-body">
+    <div class="sub-header clearfix">
+        <h2 class="pull-left">出访详情</h2>
+        <ul class="nav nav-pills pull-right" ngsl-tab>
+            <li><a href="#tb-detail">详细信息</a></li>
+            <li><a href="#tb-table">涉及表格</a></li>
+        </ul>
+    </div>
+    <div class="tab-content">
+        <div id="tb-detail" class="tab-pane">
+            <div class="toolbar clearfix">
+                <div class="btn-group pull-left">
+                    <button ng-click="back()" class="btn btn-lg btn-default btn-plain">
+                        <i class="fa fa-arrow-left"></i>
+                        返回
+                    </button>
+                </div>
+                <div class="btn-group pull-right">
+                    <button ng-click="reset()" class="btn btn-lg btn-default btn-plain">
+                        <i class="fa fa-reply"></i>
+                        重置
+                    </button>
+                    <button ng-click="update(person)" class="btn btn-lg btn-primary btn-plain">
+                        <i class="fa fa-check"></i>
+                        提交
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <span class="icon"><i class="fa fa-calendar"></i></span>
+                            <h5 class="panel-title">时间安排</h5>
+                        </div>
+                        <div class="panel-body nopadding">
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">开始时间</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" ng-model="visit.begin_date" bs-datepicker>
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" data-toggle="datepicker"><i class="fa fa-calendar"></i></button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">结束时间</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" ng-model="visit.end_date" bs-datepicker>
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" data-toggle="datepicker"><i class="fa fa-calendar"></i></button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">出境天数</label>
+                                    <div class="input-group col-md-5">
+                                        <input type="text" class="form-control" ng-model="visit.days">
+                                        <span class="input-group-addon">天</span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <span class="icon"><i class="fa fa-pencil"></i></span>
+                            <h5 class="panel-title">出访细节</h5>
+                        </div>
+                        <div class="panel-body nopadding">
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">组团单位</label>
+                                    <div class="col-lg-9">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">派员单位</label>
+                                    <div class="col-lg-9">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">任务审批单位</label>
+                                    <div class="col-lg-9">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">出访任务</label>
+                                    <div class="col-lg-9">
+                                        <textarea class="form-control"></textarea>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <span class="icon"><i class="fa fa-group"></i></span>
+                            <h5 class="panel-title">出访成员<span>（领队：<a href="#" editable-select="visit.lead" e-ng-options="m.id as m.name for m in members">{{showLead()}}</a>）</span></h5>
+
+                            <div class="buttons">
+                                <a class="btn btn-primary btn-xs" ng-click="addMember()">
+                                    <i class="icon-plus"></i>
+                                    添加成员
+                                </a>
+                            </div>
+                        </div>
+                        <div class="panel-body nopadding">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>姓名</th>
+                                        <th>性别</th>
+                                        <th>部门</th>
+                                        <th>职务</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="member in members">
+                                        <td>{{member.name}}</td>
+                                        <td>{{member.gender}}</td>
+                                        <td>{{member.department}}</td>
+                                        <td>{{member.position}}</td>
+                                        <td><a><i class="icon-times"></i></a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <span class="icon"><i class="fa fa-truck"></i></span>
+                            <h5 class="panel-title">行程</h5>
+                            <div class="buttons">
+                                <a class="btn btn-primary btn-xs" ng-click="addJourney()">
+                                    <i class="icon-plus"></i>
+                                    添加行程
+                                </a>
+                            </div>
+                        </div>
+                        <div class="panel-body nopadding">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>出访国家</th>
+                                        <th>停留天数</th>
+                                        <th>邀请单位</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="journey in journeys">
+                                        <td>{{journey.country}}</td>
+                                        <td>{{journey.days}}</td>
+                                        <td>{{journey.invitation}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <span class="icon" style="width: 40px;"><i class="fa fa-rmb"></i></span>
+                            <h5 class="panel-title">经费预算</h5>
+                        </div>
+                        <div class="panel-body nopadding">
+                            <table class="table table-bordered table-form">
+                                <thead>
+                                    <tr>
+                                        <th rowspan="2" style="width: 40px;"></th>
+                                        <th rowspan="2" style="width: 300px;">预算项目</th>
+                                        <th rowspan="2">摘要</th>
+                                        <th colspan="2">金额</th>
+                                    </tr>
+                                    <tr>
+                                        <th style="width: 100px;">外币</th>
+                                        <th style="width: 100px;">人民币</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th rowspan="6">实报实销依据凭证</th>
+                                        <td>护照办理费/签证费</td>
+                                        <td></td>
+                                        <td>
+                                            <input type="text" class="form-control" readonly="readonly" value="{{ visit.cost_qz / exchange_rate | number:3}}" /></td>
+                                        <td>
+                                            <input type="text" class="form-control" ng-model="visit.cost_qz" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>国内差旅费</td>
+                                        <td></td>
+                                        <td>
+                                            <input type="text" class="form-control" readonly="readonly" value="{{ visit.cost_gncl / exchange_rate | number:3}}" /></td>
+                                        <td>
+                                            <input type="text" class="form-control" ng-model="visit.cost_gncl" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>国际机票</td>
+                                        <td></td>
+                                        <td>
+                                            <input type="text" class="form-control" readonly="readonly" value="{{ visit.cost_gjjp / exchange_rate | number:3}}" /></td>
+                                        <td>
+                                            <input type="text" class="form-control" ng-model="visit.cost_gjjp" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>国（境）外住宿标准</td>
+                                        <td>
+                                            <div class="form-inline">
+                                                每人每天
+                                            <input type="number" class="form-control" ng-model="zsbz" />
+                                                元 x 人 x 天 
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" readonly="readonly" value="{{ visit.cost_zs / exchange_rate | number:3}}" /></td>
+                                        <td>
+                                            <input type="text" class="form-control" readonly="readonly" ng-model="visit.cost_zs" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>保险费</td>
+                                        <td></td>
+                                        <td>
+                                            <input type="text" name="cost_bx" value="{{visit.cost_qz / exchange_rate}}" /></td>
+                                        <td>
+                                            <input type="text" name="cost_bx" value="{{ visit.cost_qz }}" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>会议注册费</td>
+                                        <td></td>
+                                        <td>
+                                            <input type="text" name="cost_zc" value="{{visit.cost_qz / exchange_rate}}" /></td>
+                                        <td>
+                                            <input type="text" name="cost_zc" value="{{ visit.cost_qz }}" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th rowspan="4">包干报销 签写领条</th>
+                                        <td>国（境）外伙食标准</td>
+                                        <td>每人每天
+                                            <input type="text" ng-model="hsbz" ng-change="bzChange($event)" />
+                                            元 x 人 x 天</td>
+                                        <td>
+                                            <input type="text" name="wb" readonly="readonly" value="{{visit.cost_hs / exchange_rate}}" /></td>
+                                        <td>
+                                            <input type="text" name="rmb" readonly="readonly" value="{{ visit.cost_hs }}" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>国（境）外公杂标准</td>
+                                        <td>每人每天
+                                            <input type="text" ng-model="gzbz" ng-change="bzChange($event)" />
+                                            元 x 人 x 天</td>
+                                        <td>
+                                            <input type="text" name="wb" readonly="readonly" value="{{visit.cost_gz / exchange_rate}}" /></td>
+                                        <td>
+                                            <input type="text" name="rmb" readonly="readonly" value="{{ visit.cost_gz }}" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>国（境）外零用标准</td>
+                                        <td></td>
+                                        <td>
+                                            <input type="text" name="wb" readonly="readonly" value="{{visit.cost_ly / exchange_rate}}" /></td>
+                                        <td>
+                                            <input type="text" name="rmb" readonly="readonly" value="{{ visit.cost_ly }}" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>其他</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>总计金额</th>
+                                        <td colspan="2">{{visit.cost_total }}</td>
+                                        <td colspan="2">参考汇率：
+                                            <input type="text" ng-model="exchange_rate" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="tb-table" class="tab-pane" ng-controller="visitTableCtrl">
+            <div class="row">
+                <div class="col-md-12">
+                    <hr />
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <span class="icon"><i class="fa fa-tasks"></i></span>
+                            <h5 class="panel-title">出访所涉及的表格</h5>
+                        </div>
+                        <div class="panel-body nopadding">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="num" style="width: 33px;">#</th>
+                                        <th>表格名称</th>
+                                        <th>份数</th>
+                                        <th>完成度</th>
+                                        <th style="width: 80px;">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="table in tables">
+                                        <td class="num">{{$index+1}}</td>
+                                        <td>{{table.name}}</td>
+                                        <td>{{table.amount}}</td>
+                                        <td>
+                                            <div class="progress">
+                                                <div class="progress-bar progress-bar-success" style="{{'width:' + table.completeness}}">
+                                                    <span class="sr-only">{{table.completeness}}</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-default btn-xs" ng-click="edit('sq_table')">查看</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div id="modal" class="modal fade" role="dialog" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog" style="width: 80%; max-width: 960px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">表格预览</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-loading">
+                        <div class="modal-loading-c">
+                            <div class="modal-loading-t">内容正在加载中...</div>
+                            <div class="progress progress-striped active">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                    <span class="sr-only">100% Complete</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">保存</button>
+                    <button type="button" class="btn btn-default">导出</button>
+                    <button type="button" class="btn btn-default">打印</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

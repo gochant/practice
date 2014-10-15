@@ -1,0 +1,22 @@
+<div class="panel panel-plain" ng-controller="countryListCtrl">
+    <div class="panel-heading">
+        <h5 class="panel-title">国家列表</h5>
+        <div class="buttons">
+            <a class="btn btn-primary btn-xs" ng-click="addNew()"><i class="fa fa-plus"></i>
+                添加新国家
+            </a>
+        </div>
+    </div>
+    <div class="list-group">
+        <a href="#" class="list-group-item clearfix" ng-click="selectRow($event, $index)" ng-class="{active: $index === selectedIndex}" ng-repeat="entity in entities">
+            <div class="list-group-item-thumb">
+                <img class="img-thumbnail"
+                    src="http://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Flag_of_{{country.Flag}}.svg/50px-Flag_of_{{entity.flag}}.svg.png"
+                    width="50" height="36" />
+            </div>
+            <h5 class="list-group-item-heading">{{entity.cname}}</h5>
+            <p class="list-group-item-text">{{entity.desc}}</p>
+        </a>
+    </div>
+</div>
+

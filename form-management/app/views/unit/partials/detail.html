@@ -1,0 +1,56 @@
+<div class="content-body" ng-controller="unitDetailCtrl">
+    <div class="sub-header clearfix">
+        <h2 class="pull-left">{{unit.name}}
+        </h2>
+    </div>
+    <div class="toolbar">
+        <button ng-click="reset()" class="btn btn-lg btn-default btn-plain">
+            <i class="fa fa-reply"></i>
+            重置
+        </button>
+        <button ng-click="update(person)" class="btn btn-lg btn-primary btn-plain">
+            <i class="fa fa-check"></i>
+            提交
+        </button>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="icon"><i class="icon-th"></i></span>
+                    <h5 class="panel-title">基本信息</h5>
+                </div>
+                <div class="panel-body nopadding">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">名称</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" ng-model="unit.name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">类别</label>
+                            <div class="col-md-9">
+                                <label class="checkbox-inline" ng-repeat="cls in classes">
+                                    <input type="checkbox" 
+                                            ng-checked="unit.classes.charAt(cls.index) === '1'"
+                                            ng-click="toggleSelection(cls, $event)">
+                                    {{cls.name}}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">备注</label>
+                            <div class="col-md-9">
+                                <textarea class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

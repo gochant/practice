@@ -1,0 +1,73 @@
+﻿html {
+    /*overflow: auto;*/
+}
+
+body {
+    overflow-y: scroll;
+}
+
+    body > .container {
+        padding-top: 60px;
+    }
+
+.toolbar {
+    margin-bottom: 20px;
+    padding:5px;
+    background:#eee;
+    border:1px solid #ddd;
+}
+.affix{
+    z-index:10;
+}
+
+/*.table tr:hover {
+    cursor: pointer;
+}*/
+
+.table .sel-opt {
+    width: 30px;
+}
+
+    .table .sel-opt:hover {
+        cursor: default;
+    }
+
+.modal {
+}
+
+.modal-header {
+    color: #ffffff;
+    background-color: #428bca;
+    border-color: #428bca;
+}
+
+.modal-header .close {
+    color: #fff;
+}
+
+.modal-loading {
+    position: relative;
+    height: 200px;
+}
+
+.modal-loading-c {
+    position: relative;
+    top: 70px;
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.modal-loading-t {
+    padding-bottom: 10px;
+}
+
+.s-panel-tab .panel-heading {
+    padding-bottom: 0;
+}
+.s-panel-tab .panel-title {
+    margin-top: 7px;
+}
+.s-panel-tab .nav {
+    margin-bottom: -1px;
+}

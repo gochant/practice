@@ -1,0 +1,42 @@
+<!--侧边栏-->
+<!--<ul class="nav nav-list well">
+
+        <li ng-repeat="action in actions">
+            <span ng-if="action.head">{{action.name}}</span>
+            <a ng-if="!action.head" tabindex="-1" href="{{action.href}}">{{action.name}}</a>
+        </li>
+    </ul>-->
+<div id="header">
+    <h1><a href="#">Form.App</a></h1>
+</div>
+<ul ngsl-sidebar>
+    <li class="active"><a href="javascript:;"><i class="icon icon-home"></i><span>主页</span></a> </li>
+    <li class="submenu"><a href="#"><i class="icon icon-th-list"></i><span>表单任务</span> <span class="label label-important">2</span></a>
+        <ul>
+            <li><a href="#/visit">人员出访管理</a></li>
+            <li><a href="javascript:;">人员留学管理</a></li>
+        </ul>
+    </li>
+    <li class="submenu"><a href="#"><i class="icon icon-file"></i><span>基础数据</span> <span class="label label-important">3</span></a>
+        <ul>
+            <li><a href="#/person">人员管理</a></li>
+            <li><a href="#/country">国家管理</a></li>
+            <li><a href="#/unit">单位管理</a></li>
+        </ul>
+    </li>
+    <!--    <li class="content"><span>Monthly Bandwidth Transfer</span>
+        <div class="progress progress-mini progress-danger active progress-striped">
+            <div style="width: 77%;" class="bar"></div>
+        </div>
+        <span class="percent">77%</span>
+        <div class="stat">21419.94 / 14000 MB</div>
+    </li>
+    <li class="content"><span>Disk Space Usage</span>
+        <div class="progress progress-mini active progress-striped">
+            <div style="width: 87%;" class="bar"></div>
+        </div>
+        <span class="percent">87%</span>
+        <div class="stat">604.44 / 4000 MB</div>
+    </li>-->
+</ul>
+<!--<div class="copyright">2013 &copy; {{sysData.copyright}} </div>-->

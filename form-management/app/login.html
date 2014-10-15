@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Form.App-智能的表单系统</title>
+    <link href="vendor/bootstrap/css/magic-bootstrap.css" rel="stylesheet" />
+    <link href="styles/login.css" rel="stylesheet" />
+
+    <!--[if lt IE 9]>
+        <script src="../bower_components/bootstrap/assets/js/html5shiv.js"></script>
+        <script src="../bower_components/bootstrap/assets/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="container">
+        <form class="form-signin">
+            <h2 class="form-signin-heading">Form.App</h2>
+            <input type="text" class="form-control" placeholder="账户" autofocus="">
+            <input type="password" class="form-control" placeholder="密码">
+            <label class="checkbox">
+                <input type="checkbox" value="remember-me">记住我
+            </label>
+            <button class="btn btn-login btn-lg btn-primary btn-block" type="submit">登 录</button>
+        </form>
+    </div>
+    <script src="../bower_components/jquery/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $('.btn-login').on('click', function (e) {
+                e.preventDefault();
+                // TODO: 登录验证
+                $.getJSON('mock/data/auth.json').done(function (resp) {
+                    if (resp.success) {
+                        window.location.replace('index.html');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

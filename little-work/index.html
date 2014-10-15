@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="TestApp">
+<head>
+    <title></title>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <style>
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+        }
+
+        td, th {
+            border: 1px solid #999;
+        }
+
+        .input:focus {
+            border: 2px solid #0026ff;
+        }
+    </style>
+    <script src="angular.min.js"></script>
+    <script src="jquery.min.js"></script>
+    <script src="controllers.js"></script>
+</head>
+<body ng-controller="MainCtrl">
+    <table>
+        <thead>
+            <tr>
+                <th>Column1</th>
+                <th>Column2</th>
+                <th>Column3</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in collection">
+                <td>
+                    <select class="input" data-x="0" data-y="{{ $index }}" ng-click="focus($event)" ng-keydown="nav($event)" ng-model="item.val1" ng-options="group.name as group.name for group in groups"></select>
+                </td>
+                <td>
+                    <select class="input" data-x="1" data-y="{{ $index }}" ng-click="focus($event)" ng-keydown="nav($event)" ng-model="item.val2" ng-options="member for member in getMembers(item.val1)"></select>
+                </td>
+                <td>
+                    <input class="input" data-x="2" data-y="{{ $index }}" ng-click="focus($event)" ng-keydown="nav($event)" type="text" ng-model="item.val3" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

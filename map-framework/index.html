@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+    <title>Map Test</title>
+    <link href="../../vendor/arcgis_js_api/library/3.10/3.10/js/dojo/dijit/themes/claro/claro.css" rel="stylesheet" />
+    <link href="../../vendor/arcgis_js_api/library/3.10/3.10/js/esri/css/esri.css" rel="stylesheet" />
+
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #map-container {
+            width: 100%;
+            height: 100%;
+        }
+
+        #map {
+            position: relative;
+            height: 100%;
+        }
+
+
+        .claro .dijitBorderContainer-dijitContentPane {
+            padding: 0;
+        }
+
+        #rightPane {
+            width: 20%;
+        }
+    </style>
+</head>
+
+<body class="claro">
+    <div id="map-container" data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="gutters:true, liveSplitters:false">
+        <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center', splitter:false">
+            <div id="map"></div>
+        </div>
+        <div id="rightPane"
+            data-dojo-type="dijit/layout/ContentPane"
+            data-dojo-props="region:'right'">
+            <div id="sidePane" data-dojo-type="dijit/layout/TabContainer" style="width: 100%; height: 100%;"></div>
+        </div>
+    </div>
+    <script>
+        var dojoConfig = {
+            baseUrl: '../../vendor/arcgis_js_api/library/3.10/3.10/js/dojo/dojo',
+            paths: {
+                map: location.pathname.replace(/\/[^/]+$/, "") + "/map"
+
+            },
+            // parseOnLoad: false,
+            async: true
+        };
+    </script>
+    <script src="../../vendor/arcgis_js_api/library/3.10/3.10/init.js"></script>
+    <script>
+        var map;
+        require([
+            'dojo/parser',
+            'esri/layers/ArcGISDynamicMapServiceLayer',
+            'esri/geometry/Extent',
+            'map/core/layout',
+            'map/core/Map',
+            'dojo/domReady!'
+        ], function (parser, ArcGISDynamicMapServiceLayer, Extent, layout, Map) {
+
+            parser.parse().then(function () {
+
+                var map = new Map({
+                    el: "map",
+                    widgets: ['Legend', 'OverviewMap', 'Scalebar', 'Measurement'],
+                    mapOptions: {
+                        basemap: "topo",  // "hybrid", "topo", "gray", "oceans", "national-geographic", "osm"
+                        center: [-117.45, 34.338],
+                        zoom: 10,
+                        autoResize: true,
+                        logo: false
+                    }
+                });
+                map.widgetManager.init();
+                layout(map);
+
+
+                var quakeLayer = new ArcGISDynamicMapServiceLayer("http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Earthquakes/EarthquakesFromLastSevenDays/MapServer", {
+                    id: 'quakes'
+                });
+                var fireLayer = new ArcGISDynamicMapServiceLayer("http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Fire/Sheep/MapServer", {
+                    id: 'fire'
+                });
+                map.legendLayers.push({ layer: quakeLayer, title: 'Earthquakes' });
+                map.legendLayers.push({ layer: fireLayer, title: "Fire" });
+                map.instance.addLayers([fireLayer, quakeLayer]);
+
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>

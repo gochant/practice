@@ -1,0 +1,20 @@
+<div class="panel panel-plain" ng-controller="unitListCtrl">
+    <div class="panel-heading">
+        <span class="icon"><i class="fa fa-reorder"></i></span>
+        <h5 class="panel-title">单位列表</h5>
+        <div class="buttons">
+            <a class="btn btn-primary btn-xs"><i class="fa fa-plus"></i>
+                添加新单位
+            </a>
+        </div>
+    </div>
+    <div class="list-group">
+        <a href="#" class="list-group-item clearfix"
+            ng-repeat="unit in units"
+            ng-click="selectRow($event, $index, unit.id)"
+            ng-class="{active: $index === selectedIndex}">
+            <h5 class="list-group-item-heading">{{unit.name}}</h5>
+            <p class="list-group-item-text">{{unit.desc}}</p>
+        </a>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form.App-智能的表单系统</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="vendor/bootstrap/css/magic-bootstrap.css" rel="stylesheet" />
+    <link href="vendor/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="vendor/select2/select2.css" rel="stylesheet" />
+    <link href="vendor/bootstrap/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="vendor/angular-xeditable/css/xeditable.css" rel="stylesheet" />
+
+    <link href="styles/theme.css" rel="stylesheet" />
+</head>
+<body ng-controller="mainCtrl">
+    <div id="topbar" class="navbar">
+        <ul class="nav">
+            <li class="dropdown" id="profile-messages">
+                <a title="" href="#" data-toggle="dropdown" data-target="#profile-messages" class="dropdown-toggle">
+                    <i class="icon icon-user"></i>
+                    <span class="text">欢迎用户</span>
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#"><i class="icon-user"></i>
+                            我的配置
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="#">
+                        <i class="icon-check"></i>
+                        我的表单任务
+                    </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="login.html"><i class="icon-key"></i>
+                        注销</a></li>
+                </ul>
+            </li>
+            <li class=""><a title="" href="#"><i class="icon icon-cog"></i>
+                <span class="text">设置
+                </span>
+
+            </a></li>
+            <li class=""><a title="" href="login.html"><i class="icon icon-share-alt"></i>
+                <span class="text">注销</span>
+
+            </a></li>
+        </ul>
+    </div>
+    <!--  <div id="search">
+        <input type="text" placeholder="Search here..." />
+        <button type="submit" class="tip-bottom" title="Search"><i class="icon-search icon-white"></i></button>
+    </div>-->
+    <div id="sidebar" ng-include="partial.sidebar" class="clearfix"></div>
+
+    <div id="content" class="clearfix">
+        <div class="ng-view clearfix"></div>
+    </div>
+    <!--    <div id="footer" ng-include="partial.footer"></div>-->
+    <script data-main="scripts/main" src="vendor/requirejs/require.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+person 人
+
+姓：First
+名：Last
+姓拼音：FirstSpell
+名拼音：LastSpell
+证件类型：CertType
+证件号码：CertNumber
+性别：Gender
+出生日期：Birthdate
+年龄：Age
+出生地：BirthPlace
+户口所在地：RegisterPlace
+居住地：ResidencePlace
+是否外国国籍 IsForeign
+工作单位：WorkUnit
+部门：Department
+职务：Title
+职业属性：ProfessionAttr
+行政级别：AdminLevel
+政治面貌：PoliticalStatus
+人员属性：Property
+是否涉密人员：IsSecretRelated
+涉密等级：SecretLevel
+健康状况：Health
+
+visit 出访
+
+开始时间：begin_date
+结束时间：end_date
+天数：days
+组团单位：group_unit
+派员单位：send_unit
+审批单位：approval_unit
+出访任务：task
+领队：lead_id
+签证费：cost_qz
+国内差旅费：cost_gncl
+国际机票：cost_gjjp
+国外住宿：cost_zs
+保险费：cost_bx
+会议注册费：cost_zc
+国外伙食：cost_hs
+国外公杂：cost_gz
+国外零用：cost_ly
+其他：cost_other
+总计：cost_total
+
+
+member_relation 成员关系
+
+visit_id
+person_id
+
+country 国家
+
+id
+name
+cname
+desc
+
+unit 单位
+
+名称：name
+类别：classes
+备注：comment
+国家：country_id
+
+journey 行程
+
+标识符 id
+国家 country_id
+天数 days
+邀请单位 invite_unit

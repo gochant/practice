@@ -1,0 +1,60 @@
+<div id="content-header">
+    <div id="breadcrumb">
+        <a href="#" title="返回主页">
+            <i class="icon-home"></i>
+            主页
+        </a>
+        <a href="#/visit">出访列表</a>
+    </div>
+</div>
+<div id="content-body">
+    <div class="sub-header">
+        <h2>出访记录</h2>
+    </div>
+    <div class="toolbar clearfix">
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-lg btn-plain" ng-click="refresh($event)">
+                <span class="fa fa-refresh"></span>
+                刷新
+            </button>
+            <button type="button" class="btn btn-success btn-lg btn-plain" ng-click="new($event)">
+                <span class="fa fa-plus"></span>
+                创建新出访
+            </button>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <span class="icon"><i class="icon-th"></i></span>
+            <h5 class="panel-title">出访记录</h5>
+        </div>
+        <div class="panel-body nopadding">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="num" style="width: 33px;">#</th>
+                        <th>出访时间</th>
+                        <th>出访任务</th>
+                        <th>天数</th>
+                        <th>任务</th>
+                        <th style="width: 120px;">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="visit in visits">
+                        <td class="num">{{$index+1}}</td>
+                        <td>{{visit.start_date}}</td>
+                        <td>{{visit.end_date}}</td>
+                        <td>{{visit.days}}</td>
+                        <td>{{visit.task}}</td>
+                        <td>
+                            <a class="btn btn-primary btn-xs" ng-click="edit(visit.id, $event)">编辑</a>
+                            <a class="btn btn-danger btn-xs" ng-click="remove(visit.id, $event)">删除</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
