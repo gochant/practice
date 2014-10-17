@@ -1,0 +1,468 @@
+﻿<!DOCTYPE html>
+<html lang="en" design-mode="on">
+<head>
+    <title></title>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../vendor/bootstrapvalidator/css/bootstrapValidator.min.css" rel="stylesheet" />
+    <style>
+        #html5Form .selectContainer .form-control-feedback {
+            right: 25px;
+        }
+    </style>
+</head>
+<body style="width: 800px; margin: 0 auto;">
+    form demo 
+    <hr />
+    <form class="form-horizontal" id="html5Form" data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
+        data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
+        data-bv-feedbackicons-validating="glyphicon glyphicon-refresh">
+        <fieldset>
+            <legend>测试表单</legend>
+            <div class="form-group row">
+                <div class="col-xs-6">
+                    <div class="row">
+                        <label class="col-xs-3 control-label">Username</label>
+                        <div class="col-xs-9">
+                            <input type="text" class="form-control" name="username" required pattern="^[a-zA-Z0-9]+$" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="row">
+                        <label class="col-xs-3 control-label">Email address</label>
+                        <div class="col-xs-9">
+                            <input class="form-control" name="email" type="email" required />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-xs-6">
+                    <div class="row">
+                        <label class="col-sm-3 control-label">Email address</label>
+                        <div class="col-sm-5 selectContainer">
+                            <select name="hehe" class="form-control" required>
+                                <option value="">---</option>
+                                <option value="123">123</option>
+                                <option value="456">456</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+    <form id="movieForm" method="post">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm-8">
+                    <label class="control-label">电影名称：</label>
+                    <input type="text" class="form-control" name="title" />
+                </div>
+                <div class="col-sm-4 selectContainer">
+                    <label class="control-label">Genre</label>
+                    <select class="form-control" name="genre">
+                        <option value="">Choose a genre</option>
+                        <option value="action">Action</option>
+                        <option value="comedy">Comedy</option>
+                        <option value="horror">Horror</option>
+                        <option value="romance">Romance</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm-4">
+                    <label class="control-label">Director</label>
+                    <input type="text" class="form-control" name="director" />
+                </div>
+
+                <div class="col-sm-4">
+                    <label class="control-label">Writer</label>
+                    <input type="text" class="form-control" name="writer" />
+                </div>
+
+                <div class="col-sm-4">
+                    <label class="control-label">Producer</label>
+                    <input type="text" class="form-control" name="producer" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm-6">
+                    <label class="control-label">Website</label>
+                    <input type="text" class="form-control" name="website" />
+                </div>
+
+                <div class="col-sm-6">
+                    <label class="control-label">Youtube trailer</label>
+                    <input type="text" class="form-control" name="trailer" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Review</label>
+            <textarea class="form-control" name="review" rows="8"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Rating</label>
+            <div>
+                <label class="radio-inline">
+                    <input type="radio" name="rating" value="terrible" />
+                    Terrible
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="rating" value="watchable" />
+                    Watchable
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="rating" value="best" />
+                    Best ever
+                </label>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-default">Validate</button>
+    </form>
+
+    <form class="form-horizontal">
+
+
+        <div class="page-header">
+            <h4>申请书类型</h4>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label" for="">申请书类别：</label>
+            <div class="col-sm-4">
+                <select name="applyType" class="form-control" data-text-field="key" data-value-field="value" data-bind="value: data.applyType, source: ApplyTypes"></select>
+            </div>
+        </div>
+        <fieldset>
+            <legend>申请人</legend>
+            <div class="form-group">
+                <div class="col-xs-6 ">
+                    <div class="row">
+                        <label class="col-xs-3 control-label " for="">年龄：</label>
+                        <div class="col-xs-9">
+                            <input type="number" class="form-control" data-role="numerictextbox" name="applyerAge" data-min="0" max="120" data-format="n0" data-bind="value: data.applyerAge">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="row">
+                        <label class="col-xs-3 control-label" for="">住所：</label>
+                        <div class="col-xs-9">
+                            <input type="text" class="form-control" name="applyerAddress" maxlength="50" data-bind="value: data.applyerAddress">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <label class="control-label" for="">邮编：</label>
+                        <input type="text" class="form-control" name="applyerZipCode" pattern="^\d{6}$" validationmessage="格式错误，应为6位数字" maxlength="6" data-bind="value: data.applyerZipCode">
+                    </div>
+                    <div class="col-xs-6">
+                        <label class="control-label" for="">电话：</label>
+                        <input type="text" class="form-control" pattern="^[\+|\-|\d]*$" validationmessage="请输入正确的电话号码格式" name="applyerPhone" maxlength="20" data-bind="value: data.applyerPhone">
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="page-header">
+            <h4>代理人(申请人)</h4>
+        </div>
+        <div class="form-group">
+            <div class="col-md-6 row">
+                <label class="col-sm-3 control-label" for="">姓名：</label>
+                <div class="col-sm-7 row">
+                    <input type="text" class="form-control" name="applyAgentName" maxlength="10" data-bind="value: data.applyAgentName">
+                </div>
+            </div>
+            <div class="col-md-6 row">
+                <label class="col-sm-3 control-label " for="">性别：</label>
+                <div class="col-sm-7 row">
+                    <select name="applyAgentGender" class="form-control" data-bind="value: data.applyAgentGender, source: Genders"></select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-6 row">
+                <label class="col-sm-3 control-label " for="">年龄：</label>
+                <div class="col-sm-7 row">
+                    <input type="number" class="input-medium" data-role="numerictextbox" name="applyAgentAge" data-min="0" max="120" data-format="n0" data-bind="value: data.applyAgentAge">
+                </div>
+            </div>
+            <div class="col-md-6 row">
+                <label class="col-sm-3 control-label" for="">住所：</label>
+                <div class="col-sm-7 row">
+                    <input type="text" class="form-control" name="applyAgentAddress" maxlength="50" data-bind="value: data.applyAgentAddress">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-6 row">
+                <label class="col-sm-3 control-label" for="">邮编：</label>
+                <div class="col-sm-7 row">
+                    <input type="text" class="form-control" name="applyAgentZipCode" pattern="^\d{6}$" validationmessage="格式错误，应为6位数字" maxlength="6" data-bind="value: data.applyAgentZipCode">
+                </div>
+            </div>
+            <div class="col-md-6 row">
+                <label class="col-sm-3 control-label" for="">电话：</label>
+                <div class="col-sm-7 row">
+                    <input type="text" class="form-control" name="applyAgentPhone" pattern="^[\+|\-|\d]*$" validationmessage="请输入正确的电话号码格式" maxlength="20" data-bind="value: data.applyAgentPhone">
+                </div>
+            </div>
+        </div>
+        <div class="page-header">
+            <h4>法人或其他组织(申请人)</h4>
+        </div>
+        <div class="form-group">
+            <div class="col-md-6 row">
+                <label class="col-sm-3 control-label" for="">名称：</label>
+                <div class="col-sm-7 row">
+                    <input type="text" class="form-control" name="applylegalName" maxlength="10" data-bind="value: data.applylegalName">
+                </div>
+            </div>
+            <div class="col-md-6 row">
+                <label class="col-sm-3 control-label" for="">电话：</label>
+                <div class="col-sm-7 row">
+                    <input type="text" class="form-control" pattern="^[\+|\-|\d]*$" validationmessage="请输入正确的电话号码格式" name="applylegalPhone" maxlength="20" data-bind="value: data.applylegalPhone">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-6 row">
+                <label class="col-sm-3 control-label" for="">法人代表：</label>
+                <div class="col-sm-7 row">
+                    <input type="text" class="form-control" name="applylegalPeople" maxlength="10" data-bind="value: data.applylegalPeople">
+                </div>
+            </div>
+            <div class="col-md-6 row">
+                <label class="col-sm-3 control-label" for="">职务：</label>
+                <div class="col-sm-7 row">
+                    <input type="text" class="form-control" name="applylegalJob" maxlength="10" data-bind="value: data.applylegalJob">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-6 row">
+                <label class="col-sm-3 control-label" for="">地址：</label>
+                <div class="col-sm-7 row">
+                    <input type="text" class="form-control" name="applylegalAddress" maxlength="50" data-bind="value: data.applylegalAddress">
+                </div>
+            </div>
+        </div>
+        <div class="page-header">
+            <h4>被申请人</h4>
+        </div>
+        <div class="form-group">
+            <div class="col-md-6 row">
+                <label class="col-sm-3 control-label" for="">年龄：</label>
+                <div class="col-sm-7 row">
+                    <input type="number" class="input-medium" data-role="numerictextbox" name="byApplyerAge" data-min="0" max="120" data-format="n0" data-bind="value: data.byApplyerAge">
+                </div>
+            </div>
+            <div class="col-md-6 row">
+                <label class="col-sm-3 control-label" for="">住所：</label>
+                <div class="col-sm-7 row">
+                    <input type="text" class="form-control" name="byApplyerAddress" maxlength="50" data-bind="value: data.byApplyerAddress">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-6 row">
+                <label class="col-sm-3 control-label" for="">邮编：</label>
+                <div class="col-sm-7 row">
+                    <input type="text" class="form-control" name="byApplyerZipCode" maxlength="6" pattern="^\d{6}$" validationmessage="格式错误，应为6位数字" data-bind="value: data.byApplyerZipCode">
+                </div>
+            </div>
+            <div class="col-md-6 row">
+                <label class="col-sm-3 control-label" for="">电话：</label>
+                <div class="col-sm-7 row">
+                    <input type="text" class="form-control" pattern="^[\+|\-|\d]*$" validationmessage="请输入正确的电话号码格式" name="byApplyerPhone" maxlength="20" data-bind="value: data.byApplyerPhone">
+                </div>
+            </div>
+        </div>
+        <div class="page-header">
+            <h4>代理人(申请人)</h4>
+        </div>
+        <div class="form-group">
+            <div class="col-md-6 row">
+                <label class="col-sm-3 control-label" for="">姓名：</label>
+                <div class="col-sm-7 row">
+                    <input type="text" class="form-control" name="byApplyerAgentName" maxlength="10" data-bind="value: data.byApplyerAgentName">
+                </div>
+            </div>
+            <div class="col-md-6 row">
+                <label class="col-sm-3 control-label " for="">性别：</label>
+                <div class="col-sm-7 row">
+                    <select name="byApplyerAgentGender" class="form-control" data-bind="value: data.byApplyerAgentGender, source: Genders"></select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-6 row">
+                <label class="col-sm-3 control-label " for="">年龄：</label>
+                <div class="col-sm-7 row">
+                    <input type="number" class="input-medium" data-role="numerictextbox" name="byApplyerAgentAge" data-min="0" max="120" data-format="n0" data-bind="value: data.byApplyerAgentAge">
+                </div>
+            </div>
+            <div class="col-md-6 row">
+                <label class="col-sm-3 control-label" for="">住所：</label>
+                <div class="col-sm-7 row">
+                    <input type="text" class="form-control" name="byApplyerAgentAddress" maxlength="50" data-bind="value: data.byApplyerAgentAddress">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-6 row">
+                <label class="col-sm-3 control-label" for="">邮编：</label>
+                <div class="col-sm-7 row">
+                    <input type="text" class="form-control" name="byApplyerAgentZipCode" pattern="^\d{6}$" validationmessage="格式错误，应为6位数字" maxlength="6" data-bind="value: data.byApplyerAgentZipCode">
+                </div>
+            </div>
+            <div class="col-md-6 row">
+                <label class="col-sm-3 control-label" for="">电话：</label>
+                <div class="col-sm-7 row">
+                    <input type="text" class="form-control" name="byApplyerAgentPhone" pattern="^[\+|\-|\d]*$" validationmessage="请输入正确的电话号码格式" maxlength="20" data-bind="value: data.byApplyerAgentPhone">
+                </div>
+            </div>
+        </div>
+        <div class="page-header">
+            <h4>法人或其他组织(被申请人)</h4>
+        </div>
+        <div class="form-group">
+            <div class="col-md-6 row">
+                <label class="col-sm-3 control-label" for="">名称：</label>
+                <div class="col-sm-7 row">
+                    <input type="text" class="form-control" name="byApplylegalName" maxlength="10" data-bind="value: data.byApplylegalName">
+                </div>
+            </div>
+            <div class="col-md-6 row">
+                <label class="col-sm-3 control-label" for="">电话：</label>
+                <div class="col-sm-7 row">
+                    <input type="text" class="form-control" pattern="^[\+|\-|\d]*$" validationmessage="请输入正确的电话号码格式" maxlength="20" name="byApplylegalPhone" data-bind="value: data.byApplylegalPhone">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-6 row">
+                <label class="col-sm-3 control-label" for="">法人代表：</label>
+                <div class="col-sm-7 row">
+                    <input type="text" class="form-control" name="byApplylegalPeople" maxlength="10" data-bind="value: data.byApplylegalPeople">
+                </div>
+            </div>
+            <div class="col-md-6 row">
+                <label class="col-sm-3 control-label" for="">职务：</label>
+                <div class="col-sm-7 row">
+                    <input type="text" class="form-control" name="byApplylegalJob" maxlength="10" data-bind="value: data.byApplylegalJob">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-6 row">
+                <label class="col-sm-3 control-label" for="">地址：</label>
+                <div class="col-sm-7 row">
+                    <input type="text" class="form-control" name="byApplylegalAddress" maxlength="50" data-bind="value: data.byApplylegalAddress">
+                </div>
+            </div>
+        </div>
+        <div class="page-header">
+            <h4>其他</h4>
+        </div>
+        <div class="form-group">
+            <div class="col-md-6 row">
+                <label class="col-sm-3 control-label required" for="">仲裁请求：</label>
+                <div class="col-sm-7 row">
+                    <input type="text" class="form-control" required="required" name="arbitrateRequest" maxlength="500" data-bind="value: data.arbitrateRequest">
+                </div>
+            </div>
+            <div class="col-md-6 row">
+                <label class="col-sm-3 control-label" for="">纠纷类型：</label>
+                <div class="col-sm-7 row">
+                    <select name="IssueType" class="form-control" data-text-field="key" data-value-field="value" data-bind="value: data.IssueType, source: IssueTypes"></select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-6 row">
+                <label class="col-sm-3 control-label" for="">记录人：</label>
+                <div class="col-sm-7 row">
+                    <input type="text" class="form-control" name="writePeople" maxlength="10" data-bind="value: data.writePeople">
+                </div>
+            </div>
+            <div class="col-md-6 row">
+                <label class="col-sm-3 control-label required" for="">申请日期：</label>
+                <div class="col-sm-7 row">
+                    <input type="date" data-role="datepicker" required validationmessage="申请日期必填" maxlength="4" data-bind="date: data.ApplyDate">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-6 row">
+                <label class="col-sm-3 control-label required" for="">仲裁年号：</label>
+                <div class="col-sm-7 row">
+                    <input type="text" class="form-control" name="yearNumber" required maxlength="4" data-bind="value: data.yearNumber">
+                </div>
+            </div>
+            <div class="col-md-6 row">
+                <label class="col-sm-3 control-label required" for="">仲裁第字号：</label>
+                <div class="col-sm-7 row">
+                    <input type="text" class="form-control" name="serialNumber" required maxlength="20" data-bind="value: data.serialNumber">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-6 row mb2">
+                <label class="col-sm-3 control-label required" for="">事实和理由：</label>
+                <div class="col-sm-7 row">
+                    <textarea class="form-control" name="arbitrateReason" required data-bind="value: data.arbitrateReason"></textarea>
+                </div>
+            </div>
+            <div class="col-md-6 row mb2">
+                <label class="col-sm-3 control-label required" for="">相关方身份：</label>
+                <div class="col-sm-7 row">
+                    <select name="partySocialStatus" class="form-control" required data-text-field="key" data-value-field="value" data-bind="value: data.partySocialStatus, source: PartySocialStatuses"></select>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+    <input type="number" value="value: number" id="" required />
+    <input type="email" value="" id="Email1" required />
+    <script src="../vendor/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../vendor/bootstrapvalidator/js/bootstrapValidator.min.js"></script>
+    <script src="../vendor/bootstrapvalidator/js/language/zh_CN.js"></script>
+    <script>
+        $(function () {
+            $('#html5Form').bootstrapValidator({
+                container: 'tooltip'
+            })
+             .on('success.field.bv', function (e, data) {
+
+                 var $parent = data.element.parents('.form-group');
+
+                 // Remove the has-success class
+                 $parent.removeClass('has-success');
+
+                 // Hide the success icon
+                 $parent.find('.form-control-feedback[data-bv-icon-for="' + data.field + '"]').hide();
+
+             });
+        });
+    </script>
+</body>
+</html>

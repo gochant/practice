@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html lang="en" design-mode="on">
+<head>
+    <title></title>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../vendor/styles/kendo.common.core.min.css" rel="stylesheet" />
+    <link href="../vendor/styles/kendo.bootstrap.min.css" rel="stylesheet" />
+    <link href="../vendor/bootstrapvalidator/css/bootstrapValidator.min.css" rel="stylesheet" />
+
+    <link href="css/bootstrap-kendoui-patch.css" rel="stylesheet" />
+</head>
+<body style="width: 800px; margin: 0 auto;">
+    form demo 
+    <hr />
+    <div id="cf">
+        <form id="form" data-role="validator" data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
+        data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
+        data-bv-feedbackicons-validating="glyphicon glyphicon-refresh">
+            <div class="form-group">
+                <input type="date" name="date" value="" data-role="datepicker" id="" required />
+                <input type="text" name="name" class="form-control" value="" required id="Text1" />
+            </div>
+        </form>
+        <form id="form1" data-role="validator" data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
+        data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
+        data-bv-feedbackicons-validating="glyphicon glyphicon-refresh">
+            <div class="form-group">
+                <input type="date" name="date" value="" data-role="datepicker" id="Date1" required />
+                <input type="text" name="name" class="form-control" value="" required id="Text2" />
+            </div>
+        </form>
+    </div>
+
+
+    <script src="../vendor/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../vendor/kendo.ui.core.min.js"></script>
+    <script src="../vendor/bootstrapvalidator/js/bootstrapValidator.min.js"></script>
+    <script src="../vendor/bootstrapvalidator/js/language/zh_CN.js"></script>
+    <script>
+        $(function () {
+            //$('#form').bootstrapValidator({ container: 'tooltip' });
+            //$('#form1').bootstrapValidator({ container: 'tooltip' });
+
+            $("#form").kendoValidator();
+            $("#form1").kendoValidator();
+            //$('#cf').kendoValidator();
+            //kendo.bind(document.body, {});
+        });
+    </script>
+</body>
+</html>
