@@ -1,0 +1,58 @@
+﻿.jsplumb-connector.jsplumb-hover {
+  cursor: url(../img/scissor.cur), auto;
+}
+.wf-node {
+  box-shadow: 0 1px 1px rgba(88, 88, 92, 0.1);
+  position: absolute;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 10px 0 40px;
+  font-size: 15px;
+  border: 1px solid #DADFE6;
+  background-color: #FBFBFB;
+  /*overflow: hidden;*/
+  cursor: move;
+  white-space: nowrap;
+}
+.wf-node .handle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  bottom: 0;
+  background-color: #FFF;
+  border-right: 1px solid #DADFE6;
+  font: 700 16px/40px Arial;
+  text-align: center;
+  cursor: pointer;
+  overflow: hidden;
+}
+.wf-node-hover {
+  background-color: #FFF;
+  border-color: #D96F23;
+  color: #EE8C0C;
+}
+.wf-node-start .handle,
+.wf-node-end .handle {
+  text-indent: -9999px;
+}
+.wf-node-start .handle {
+  background-color: #A7D85A;
+  border-color: #91CE31;
+  color: #FFF;
+}
+.wf-node-end .handle {
+  background-color: #4C5054;
+  border-color: #383C41;
+  color: #FFF;
+}
+.wf-node-active {
+  background-color: #FFF;
+  border-color: #238DD9;
+  color: #3497DB;
+}
+.wf-node-active .handle {
+  background-color: #238DD9;
+  border-color: #238DD9;
+  color: #FFF;
+}

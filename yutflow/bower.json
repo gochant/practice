@@ -1,0 +1,11 @@
+{
+  "name":  "yutflow",
+  "dependencies": {
+    "jquery": "latest",
+    "tinyui": "latest",
+    "font-awesome": "latest",
+    "jsplumb": "latest",
+    "underscore": "latest",
+    "bootstrap-contextmenu": "latest"
+  }
+}
