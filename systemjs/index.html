@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="test"></div>
+<script src="node_modules/systemjs/dist/system.js"></script>
+<script src="node_modules/jquery/dist/jquery.js"></script>
+
+<script src="config.js"></script>
+<script>
+    window.define = System.amdDefine;
+    window.require = System.amdRequire;
+    System.defaultJSExtensions = true;
+    // loads relative to the current page URL
+    System.import('./local-module.js');
+
+
+</script>
+</body>
+</html>
