@@ -1,4 +1,9 @@
-﻿.jsplumb-connector.jsplumb-hover {
+.wf-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.wf-container.editable .jsplumb-connector.jsplumb-hover {
   cursor: url(../img/scissor.cur), auto;
 }
 .wf-node {
@@ -11,10 +16,16 @@
   border: 1px solid #DADFE6;
   background-color: #FBFBFB;
   /*overflow: hidden;*/
-  cursor: move;
+  cusor: default;
   white-space: nowrap;
 }
-.wf-node .handle {
+.wf-node.jsplumb-draggable {
+  cursor: move;
+}
+.wf-node.jsplumb-droppable .handle {
+  cursor: pointer;
+}
+.wf-node .wf-handle {
   position: absolute;
   top: 0;
   left: 0;
@@ -24,7 +35,6 @@
   border-right: 1px solid #DADFE6;
   font: 700 16px/40px Arial;
   text-align: center;
-  cursor: pointer;
   overflow: hidden;
 }
 .wf-node-hover {
@@ -32,16 +42,16 @@
   border-color: #D96F23;
   color: #EE8C0C;
 }
-.wf-node-start .handle,
-.wf-node-end .handle {
+.wf-node-start .wf-handle,
+.wf-node-end .wf-handle {
   text-indent: -9999px;
 }
-.wf-node-start .handle {
+.wf-node-start .wf-handle {
   background-color: #A7D85A;
   border-color: #91CE31;
   color: #FFF;
 }
-.wf-node-end .handle {
+.wf-node-end .wf-handle {
   background-color: #4C5054;
   border-color: #383C41;
   color: #FFF;
@@ -51,7 +61,7 @@
   border-color: #238DD9;
   color: #3497DB;
 }
-.wf-node-active .handle {
+.wf-node-active .wf-handle {
   background-color: #238DD9;
   border-color: #238DD9;
   color: #FFF;

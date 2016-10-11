@@ -1,6 +1,4 @@
-﻿
-
-@wf-node-source-width: 30px;
+﻿@wf-node-source-width: 30px;
 @wf-node-font-size: 15px;
 @wf-node-height: 40px;
 @wf-node-padding-left: @wf-node-source-width + 10;
@@ -24,78 +22,94 @@
 @wf-node-active-handle-border-color: @wf-node-active-border-color;
 @wf-node-active-handle-color: #FFF;
 
+.wf-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
 
-.jsplumb-connector.jsplumb-hover {
+.wf-container.editable {
+  .jsplumb-connector.jsplumb-hover {
     cursor: @cursor-url, auto;
+  }
 }
 
 .wf-node {
-    box-shadow: 0 1px 1px rgba(88, 88, 92, .1);
-    position: absolute;
-    height: @wf-node-height;
-    line-height: @wf-node-height;
-    padding: 0 10px 0 @wf-node-padding-left;
-    font-size: @wf-node-font-size;
-    border: 1px solid @wf-node-border-color;
-    background-color: @wf-node-bg-color;
-    /*overflow: hidden;*/
-    cursor: move;
-    white-space: nowrap;
+  box-shadow: 0 1px 1px rgba(88, 88, 92, .1);
+  position: absolute;
+  height: @wf-node-height;
+  line-height: @wf-node-height;
+  padding: 0 10px 0 @wf-node-padding-left;
+  font-size: @wf-node-font-size;
+  border: 1px solid @wf-node-border-color;
+  background-color: @wf-node-bg-color;
+  /*overflow: hidden;*/
+  cusor: default;
+  white-space: nowrap;
 
+  &.jsplumb-draggable {
+    cursor: move;
+  }
+
+  &.jsplumb-droppable {
     .handle {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: @wf-node-source-width;
-        bottom: 0;
-        background-color: #FFF;
-        border-right: 1px solid @wf-node-border-color;
-        font: 700 16px/@wf-node-height Arial;
-        text-align: center;
-        cursor: pointer;
-        overflow: hidden;
+      cursor: pointer;
     }
+  }
+
+  .wf-handle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: @wf-node-source-width;
+    bottom: 0;
+    background-color: #FFF;
+    border-right: 1px solid @wf-node-border-color;
+    font: 700 16px/@wf-node-height Arial;
+    text-align: center;
+    overflow: hidden;
+  }
 }
 
 .wf-node-hover {
-    background-color: #FFF;
-    border-color: #D96F23;
-    color: #EE8C0C;
+  background-color: #FFF;
+  border-color: #D96F23;
+  color: #EE8C0C;
 }
 
 .wf-node-start,
 .wf-node-end {
-    .handle {
-        text-indent: -9999px;
-    }
+  .wf-handle {
+    text-indent: -9999px;
+  }
 }
 
 .wf-node-start {
-    .handle {
-        background-color: @wf-node-start-handle-bg-color;
-        border-color: @wf-node-start-handle-border-color;
-        color: @wf-node-start-handle-color;
-    }
+  .wf-handle {
+    background-color: @wf-node-start-handle-bg-color;
+    border-color: @wf-node-start-handle-border-color;
+    color: @wf-node-start-handle-color;
+  }
 }
 
 .wf-node-end {
-    .handle {
-        background-color: @wf-node-end-handle-bg-color;
-        border-color: @wf-node-end-handle-border-color;
-        color: @wf-node-end-handle-color;
-    }
+  .wf-handle {
+    background-color: @wf-node-end-handle-bg-color;
+    border-color: @wf-node-end-handle-border-color;
+    color: @wf-node-end-handle-color;
+  }
 }
 
 .wf-node-active {
-    background-color: @wf-node-active-bg-color;
-    border-color: @wf-node-active-border-color;
-    color: @wf-node-active-color;
+  background-color: @wf-node-active-bg-color;
+  border-color: @wf-node-active-border-color;
+  color: @wf-node-active-color;
 
-    .handle {
-        background-color: @wf-node-active-handle-bg-color;
-        border-color: @wf-node-active-handle-border-color;
-        color: @wf-node-active-handle-color;
-    }
+  .wf-handle {
+    background-color: @wf-node-active-handle-bg-color;
+    border-color: @wf-node-active-handle-border-color;
+    color: @wf-node-active-handle-color;
+  }
 }
 
 

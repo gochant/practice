@@ -1,4 +1,4 @@
-﻿; (function ($, window, document, undefined) {
+﻿;(function ($, window, document, undefined) {
 
     "use strict";
 
@@ -33,6 +33,10 @@
     var pluginName = "yutflow";
     var defaults = {
         nodeTpl: _.template($('#tpl-node').html()),
+        contextMenu: '#context-menu',
+        editable: true,
+        draggable: true,
+        selectable: true,
         nodeOptions: {
             prefix: "step_",
             cls: "wf-node",
@@ -44,15 +48,27 @@
             isSource: true,
             isTarget: true,
             detach: true,
-            sourceOptions: { filter: ".handle, .handle i" },
-            targetOptions: { dropOptions: { hoverClass: "wf-node-hover" } }
+            sourceOptions: {filter: ".wf-handle, .wf-handle i"},
+            targetOptions: {dropOptions: {hoverClass: "wf-node-hover"}}
         }
     };
 
     function Plugin(element, options) {
         this.element = element;
 
-        this.settings = $.extend({}, defaults, options);
+        // init options
+        this.settings = $.extend(true, {}, defaults, options);
+        if (this.settings.editable === false) {
+            this.settings.nodeOptions.isSource = false;
+            this.settings.nodeOptions.isTarget = false;
+            this.settings.nodeOptions.detach = false;
+        }
+        if (this.settings.draggable !== this.settings.nodeOptions.draggable) {
+            this.settings.nodeOptions.draggable = this.settings.draggable;
+        }
+
+        // init properties
+
         this._defaults = defaults;
         this._name = pluginName;
 
@@ -60,7 +76,7 @@
 
         // 数据缓存
         this._nodeCache = {}; // 节点缓存
-        this._connectCache = {}  // 连接缓存
+        this._connectCache = {};  // 连接缓存
 
 
         this.init();
@@ -69,65 +85,25 @@
     // #region Private Methods
 
 
-
     // #endregion
 
     $.extend(Plugin.prototype, {
         init: function () {
-            this.$container = $(this.settings.container);
+            this._initContainer();
             this._bindEvents();
-
             this._initInstance();
             this._initContextMenu();
+
             this.render(this.settings.data);
         },
-        _bindEvents: function () {
-            var options = this.settings.nodeOptions;
-            var nodeCls = this.settings.nodeOptions.cls;
-            var activeCls = this.settings.nodeOptions.activeCls;
-            var $container = this.$container;
-            var normalStepSelector = '.wf-node:not(.wf-node-start,.wf-node-end)';
-
-            var me = this;
-            $container
-                .on('click', normalStepSelector, function (e) {
-                    var $node = $(e.currentTarget);
-                    var initCoords = $node.data("initcoords") || { x: 0, y: 0 };
-
-                    if (e.originalEvent.x === initCoords.x && e.originalEvent.y === initCoords.y) {
-
-                        var id = $node.attr('data-id');
-
-                        $.each($container.find('.' + nodeCls), function (i, node) {
-                            if (me._isStartOrEndNode($(node))) {
-                                return;
-                            }
-                            if ($(node).attr('data-id') === id) {
-                                $(node).addClass(activeCls);
-                            } else {
-                                $(node).removeClass(activeCls);
-                            }
-                        });
-                    }
-                    $node.data('drag', false);
-
-                });
-
-
-
-
-            if (options.draggable) {
-                // 移动结束时，更新数据
-                //$container.on("drop", ".wf-node", function (event, ui) {
-                //    //var id = _getOriginalId(ui.helper.attr("id")),
-                //    //    position = ui.position;
-                //    //that.updateData(id, position);
-                //});
+        _initContainer: function () {
+            this.$container = $('<div class="wf-container"></div>').appendTo(this.element);
+            if (this.settings.editable) {
+                this.$container.addClass('editable');
             }
-        },
-        _isStartOrEndNode: function ($el) {
-            var options = this.settings.nodeOptions;
-            return $el.hasClass(options.startCls) || $el.hasClass(options.endCls);
+            if (this.settings.editable) {
+                this.$container.addClass('editable');
+            }
         },
         _initInstance: function () {
             var that = this;
@@ -162,14 +138,16 @@
                     dashstyle: "0",
                     outlineWidth: 4,
                     outlineColor: "transparent"
-                },
+                }
+            };
 
-                HoverPaintStyle: {
+            if (this.settings.nodeOptions.detach) {
+                jsPlumbDefaults.HoverPaintStyle = {
                     strokeStyle: "#B2C0D1",
                     lineWidth: 3,
                     dashstyle: "4 1"
                 }
-            };
+            }
 
             var instance = this.instance = jsPlumb.getInstance(jsPlumbDefaults);
 
@@ -202,8 +180,89 @@
                 });
             }
 
-
             return this.instance;
+        },
+        _initContextMenu: function () {
+            var me = this;
+            if (!this.settings.contextMenu) {
+                return;
+            }
+            this.$container.contextmenu({
+                target: this.settings.contextMenu,
+                before: function (e, element, target) {
+                    var $node = $(e.target).closest('.wf-node');
+                    if ($node.hasClass('wf-node-end') || $node.hasClass('wf-node-start')) {
+                        return false;
+                    }
+                    var menu = this.getMenu();
+                    e.preventDefault();
+                    if ($node.length > 0) {
+                        $node.addClass('contextmenuhost');
+                        menu.html($('#tpl-node-menu').html());
+                    } else {
+                        menu.html($('#tpl-canvas-menu').html());
+                    }
+
+                    return true;
+                },
+                onItem: function (context, e) {
+                    var $node = context.find('.contextmenuhost').removeClass('contextmenuhost');
+                    var action = $(e.currentTarget).find('[data-action]').attr('data-action');
+                    var handlerName = '_' + action + 'Handler';
+                    me[handlerName] && me[handlerName](e, $node);
+                }
+            });
+        },
+        _bindEvents: function () {
+            var options = this.settings.nodeOptions;
+            var nodeCls = this.settings.nodeOptions.cls;
+            var activeCls = this.settings.nodeOptions.activeCls;
+            var $container = this.$container;
+            var normalStepSelector = '.wf-node:not(.wf-node-start,.wf-node-end)';
+
+            var me = this;
+            $container
+                .on('click', normalStepSelector, function (e) {
+                    console.log('click!!');
+                    var $node = $(e.currentTarget);
+                    var id = $node.attr('data-id');
+
+                    $.each($container.find('.' + nodeCls), function (i, node) {
+                        if (me._isStartOrEndNode($(node))) {
+                            return;
+                        }
+                        if ($(node).attr('data-id') === id) {
+                            $(node).addClass(activeCls);
+                        } else {
+                            $(node).removeClass(activeCls);
+                        }
+                    });
+
+                });
+
+            if (options.draggable) {
+                // 移动结束时，更新数据
+                //$container.on("drop", ".wf-node", function (event, ui) {
+                //    //var id = _getOriginalId(ui.helper.attr("id")),
+                //    //    position = ui.position;
+                //    //that.updateData(id, position);
+                //});
+            }
+        },
+        /**
+         * 处理拖动与选中的冲突
+         * @param dest
+         * @param base
+         * @returns {boolean}
+         * @private
+         */
+        _xIsInRange: function (dest, base) {
+            var buffer = 3;
+            return dest < base + 3 && dest > base - 3;
+        },
+        _isStartOrEndNode: function ($el) {
+            var options = this.settings.nodeOptions;
+            return $el.hasClass(options.startCls) || $el.hasClass(options.endCls);
         },
         _createNodeEl: function (data) {
             var tpl = this.settings.nodeTpl;
@@ -234,13 +293,10 @@
 
             var $nodeEl = this._createNodeEl(tplData);
 
+            // 初始化拖拽
             if (options.draggable !== false) {
                 var drag = instance.draggable($nodeEl, {
-                    containment: "parent",
-                    start: function (param) {
-                        var e = param.e;
-                        $(param.el).data("initcoords", { x: e.x, y: e.y });
-                    }
+                    containment: "parent"
                 });
             }
             // 初始化连接源
@@ -330,34 +386,6 @@
                 me._addConnect(item, type);
             });
         },
-        _initContextMenu: function () {
-            var me = this;
-            this.$container.contextmenu({
-                target: '#context-menu',
-                before: function (e, element, target) {
-                    var $node = $(e.target).closest('.wf-node');
-                    if ($node.hasClass('wf-node-end') || $node.hasClass('wf-node-start')) {
-                        return false;
-                    }
-                    var menu = this.getMenu();
-                    e.preventDefault();
-                    if ($node.length > 0) {
-                        $node.addClass('contextmenuhost');
-                        menu.html($('#tpl-node-menu').html());
-                    } else {
-                        menu.html($('#tpl-canvas-menu').html());
-                    }
-
-                    return true;
-                },
-                onItem: function (context, e) {
-                    var $node = context.find('.contextmenuhost').removeClass('contextmenuhost');
-                    var action = $(e.currentTarget).find('[data-action]').attr('data-action');
-                    var handlerName = '_' + action + 'Handler';
-                    me[handlerName] && me[handlerName](e, $node);
-                }
-            });
-        },
         _getNodeEl: function () {
 
         },
@@ -401,6 +429,9 @@
         },
         data: function () {
             return this._nodeCache;
+        },
+        destroy: function () {
+
         }
     });
 
