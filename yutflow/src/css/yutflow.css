@@ -19,6 +19,12 @@
   cusor: default;
   white-space: nowrap;
 }
+.wf-node.pending {
+  opacity: .6;
+}
+.wf-node.progress {
+  border-color: #EE8C0C;
+}
 .wf-node.jsplumb-draggable {
   cursor: move;
 }
@@ -36,6 +42,17 @@
   font: 700 16px/40px Arial;
   text-align: center;
   overflow: hidden;
+}
+.wf-node_text {
+  cursor: default;
+}
+.wf-connection_label {
+  background-color: white;
+  padding: 2px 4px;
+  font-size: 12px;
+  color: #444;
+  z-index: 21;
+  opacity: 0.8;
 }
 .wf-node-hover {
   background-color: #FFF;

@@ -33,10 +33,26 @@
     var pluginName = "yutflow";
     var defaults = {
         nodeTpl: _.template($('#tpl-node').html()),
-        contextMenu: '#context-menu',
-        editable: true,
-        draggable: true,
-        selectable: true,
+        contextMenu: false,  // 指定一个选择器
+        editable: false,
+        draggable: false,
+        selectable: false,
+        onNodeClick: function(){ },
+        onConnection: function (info, wf) {
+            var conn = info.connection;
+            var $target = $(info.target);
+            var data = wf.nodeData(wf.idx($target));
+            if(data){
+                if (data.state === 'done' || data.state === 'progress') {
+                    conn.toggleType("done");
+                }
+                if (data.state === 'pending') {
+                    conn.toggleType("pending");
+                }
+            }
+
+
+        },
         nodeOptions: {
             prefix: "step_",
             cls: "wf-node",
@@ -76,8 +92,6 @@
 
         // 数据缓存
         this._nodeCache = {}; // 节点缓存
-        this._connectCache = {};  // 连接缓存
-
 
         this.init();
     }
@@ -107,23 +121,13 @@
         },
         _initInstance: function () {
             var that = this;
-            var jsPlumbDefaults = {
+            var instanceOptions = {
                 Endpoint: "Blank",
                 // Endpoint:[ "Dot", { radius:5 } ],
                 // EndpointStyle:{ fillStyle:"transparent" },
                 // EndpointHoverStyle:{ fillStyle:"#ffa500" },
 
-                Connector: "Flowchart",
-
-                ConnectionOverlays: [
-                    ["Arrow", {
-                        location: 1,
-                        id: "arrow",
-                        length: 14,
-                        foldback: 0.6
-                    }]
-                ],
-
+                Connector: ["Flowchart", { gap: 2 }],
                 ConnectionsDetachable: false,
                 ReattachConnections: false,
 
@@ -133,7 +137,7 @@
                 // Anchor: [[0, 0.5, 1, 0], [1, 0.5, 1, 0]],
                 // 连接器样式
                 PaintStyle: {
-                    strokeStyle: "#EE8C0C",
+                    strokeStyle: "#ddd",
                     lineWidth: 3,
                     dashstyle: "0",
                     outlineWidth: 4,
@@ -142,15 +146,36 @@
             };
 
             if (this.settings.nodeOptions.detach) {
-                jsPlumbDefaults.HoverPaintStyle = {
+                instanceOptions.HoverPaintStyle = {
                     strokeStyle: "#B2C0D1",
                     lineWidth: 3,
                     dashstyle: "4 1"
                 }
             }
 
-            var instance = this.instance = jsPlumb.getInstance(jsPlumbDefaults);
+            var instance = this.instance = jsPlumb.getInstance(instanceOptions);
 
+            // 注册 type
+            var doneType = {
+                paintStyle: {
+                    strokeStyle: "#EE8C0C"
+                }
+            };
+            var pendingType = {
+                paintStyle: {
+                    strokeStyle: "#efefef"
+                }
+            };
+            instance.registerConnectionType("done", doneType);
+            instance.registerConnectionType("pending", pendingType);
+
+            this._bindInstanceEvents(instance);
+
+            return this.instance;
+        },
+        _bindInstanceEvents: function (instance) {
+            var onConnection = this.settings.onConnection;
+            var me = this;
             instance.bind("beforeDrop", function (param) {
 
                 if (isConnectToSelf(param)) {
@@ -159,28 +184,71 @@
                 if (stepIsRepeat(param, instance)) {
                     return false;
                 }
-                if (isFromStartToEnd(param, that.settings.nodeOptions.prefix)) {
+                if (isFromStartToEnd(param, me.settings.nodeOptions.prefix)) {
                     return false;
                 }
                 return true;
             });
 
+            // 判定是否是
+            instance.bind("connection", function (info) {
+                onConnection.call(this, info, me);
+            });
+
+            instance.bind("connectionDetached", function (con) {
+                if (con && con.connection) {
+                    debugger;
+                }
+            });
 
             if (this.settings.nodeOptions.detach) {
-                var connectCache = this._connectCache;
-                instance.bind("connectionDetached", function (con) {
-                    if (con && con.connection) {
-                        delete connectCache[con.connection.id];
-                    }
-                });
-
                 // 删除连接线
                 instance.bind('click', function (con) {
                     instance.detach(con);
                 });
             }
+        },
+        _bindEvents: function () {
+            var options = this.settings;
+            var nodeCls = this.settings.nodeOptions.cls;
+            var activeCls = this.settings.nodeOptions.activeCls;
+            var $container = this.$container;
+            var normalStepSelector = '.wf-node:not(.wf-node-start,.wf-node-end)';
 
-            return this.instance;
+            var me = this;
+
+            $container.on('click', normalStepSelector, $.proxy(options.onNodeClick, this));
+
+            if(options.selectable){
+                // click select
+                $container.on('click', normalStepSelector, function (e) {
+                    console.log('click!!');
+                    var $node = $(e.currentTarget);
+                    var id = $node.attr('data-id');
+
+                    $.each($container.find('.' + nodeCls), function (i, node) {
+                        if (me._isStartOrEndNode($(node))) {
+                            return;
+                        }
+                        if ($(node).attr('data-id') === id) {
+                            $(node).addClass(activeCls);
+                        } else {
+                            $(node).removeClass(activeCls);
+                        }
+                    });
+
+                });
+            }
+
+
+            if (options.draggable) {
+                // 移动结束时，更新数据
+                //$container.on("drop", ".wf-node", function (event, ui) {
+                //    //var id = _getOriginalId(ui.helper.attr("id")),
+                //    //    position = ui.position;
+                //    //that.updateData(id, position);
+                //});
+            }
         },
         _initContextMenu: function () {
             var me = this;
@@ -213,53 +281,6 @@
                 }
             });
         },
-        _bindEvents: function () {
-            var options = this.settings.nodeOptions;
-            var nodeCls = this.settings.nodeOptions.cls;
-            var activeCls = this.settings.nodeOptions.activeCls;
-            var $container = this.$container;
-            var normalStepSelector = '.wf-node:not(.wf-node-start,.wf-node-end)';
-
-            var me = this;
-            $container
-                .on('click', normalStepSelector, function (e) {
-                    console.log('click!!');
-                    var $node = $(e.currentTarget);
-                    var id = $node.attr('data-id');
-
-                    $.each($container.find('.' + nodeCls), function (i, node) {
-                        if (me._isStartOrEndNode($(node))) {
-                            return;
-                        }
-                        if ($(node).attr('data-id') === id) {
-                            $(node).addClass(activeCls);
-                        } else {
-                            $(node).removeClass(activeCls);
-                        }
-                    });
-
-                });
-
-            if (options.draggable) {
-                // 移动结束时，更新数据
-                //$container.on("drop", ".wf-node", function (event, ui) {
-                //    //var id = _getOriginalId(ui.helper.attr("id")),
-                //    //    position = ui.position;
-                //    //that.updateData(id, position);
-                //});
-            }
-        },
-        /**
-         * 处理拖动与选中的冲突
-         * @param dest
-         * @param base
-         * @returns {boolean}
-         * @private
-         */
-        _xIsInRange: function (dest, base) {
-            var buffer = 3;
-            return dest < base + 3 && dest > base - 3;
-        },
         _isStartOrEndNode: function ($el) {
             var options = this.settings.nodeOptions;
             return $el.hasClass(options.startCls) || $el.hasClass(options.endCls);
@@ -277,96 +298,89 @@
 
             return max;
         },
-        _addNode: function (nodeData, options) {
+        _addNode: function (data) {
             var defaults = this.settings.nodeOptions;
             var instance = this.instance;
-            options = $.extend({}, defaults, options);
+            data = $.extend({}, defaults, data);
 
-            if (nodeData.index == null) {
-                nodeData.index = this._getMaxIndex() + 1;
+            data.state || (data.state = 'none');
+            data.cls || (data.cls = '');
+
+            if (data.index == null) {
+                data.index = this._getMaxIndex() + 1;
             }
-            if (nodeData.name == null) {
-                nodeData.name = options.autoNamePrefix + " " + nodeData.index;
+            if (data.name == null) {
+                data.name = data.autoNamePrefix + " " + data.index;
             }
 
-            var tplData = $.extend({}, options, nodeData);
+            // 特殊步骤处理, (开始结束)
 
-            var $nodeEl = this._createNodeEl(tplData);
+            if (data.index === 0) {
+                data.cls += ' ' + data.startCls;
+            }
+            if (data.index === -1) {
+                data.cls += ' ' + data.endCls;
+            }
+
+            // state 4种状态：'pending', 'progress', 'done', 'none'
+
+            if(data.state){
+                data.cls += ' ' + data.state;
+            }
+
+
+            var $nodeEl = this._createNodeEl(data);
 
             // 初始化拖拽
-            if (options.draggable !== false) {
+            if (data.draggable !== false) {
                 var drag = instance.draggable($nodeEl, {
                     containment: "parent"
                 });
             }
             // 初始化连接源
-            if (options.isSource !== false) {
-                instance.makeSource($nodeEl, options.sourceOptions);
+            if (data.isSource !== false) {
+                instance.makeSource($nodeEl, data.sourceOptions);
             }
 
             // 初始化连接目标
-            if (options.isTarget !== false) {
-                instance.makeTarget($nodeEl, options.targetOptions);
+            if (data.isTarget !== false) {
+                instance.makeTarget($nodeEl, data.targetOptions);
             }
 
-
-            this._nodeCache[nodeData.index] = nodeData;
+            this._nodeCache[data.index] = data;
 
             return $nodeEl;
         },
-        _addConnect: function (connect, type) {
-            var options = this.settings.nodeOptions;
+        _addConnection: function (options) {
             var instance = this.instance;
-            if (typeof connect === "string") {
-                var con = connect.split(",", 2);
-                instance.connect({
-                    source: options.prefix + con[0],
-                    target: options.prefix + con[1],
-                    type: type
-                });
+            options.source = this._getNodeId(options.source);
+            options.target = this._getNodeId(options.target);
+            options.overlays = [
+                ["Arrow", {
+                    location: 1,
+                    id: "arrow",
+                    length: 14,
+                    foldback: 0.6
+                }]];
+
+            if (options.text) {
+                options.overlays.push(["Label", {
+                    location: 0.2,
+                    id: "label",
+                    cssClass: "wf-connection_label",
+                    label: options.text
+                    // ,
+                    // events:{
+                    //     tap:function() { alert("hey"); }
+                    // }
+                }]);
             }
+            var connection = instance.connect(options);
+            return connection;
         },
-        _parseData: function (data) {
-            var result = {
-                nodes: [],
-                connects: []
-            };
-            var options = this.settings.nodeOptions;
-            var pushConnect = function (sourceId, targetIds) {
-                if (sourceId == null || targetIds == null || targetIds === "") {
-                    return false;
-                }
-                var tids = targetIds.split(",");
-                $.each(tids, function (i, tid) {
-                    result.connects.push(sourceId + ',' + tid);
-                });
-            };
-
-            if (data && data.length) {
-                for (var i = 0; i < data.length; i++) {
-                    // 只接收需要的属性
-                    var d = {
-                        id: data[i].id,
-                        index: data[i].processid,
-                        top: data[i].top,
-                        left: data[i].left,
-                        name: data[i].name,
-                        to: data[i].to
-                    };
-                    // 特殊步骤处理, (开始结束)
-                    if (d.index === -1) {
-                        d.cls = options.startCls;
-                    } else if (d.index === 0) {
-                        d.cls = options.endCls;
-                    }
-                    result.nodes.push(d);
-                    if (d.to) {
-                        pushConnect(d.index, d.to);
-                    }
-                }
-            }
-
-            return result;
+        _getNodeId: function (id) {
+            var nodeOptions = this.settings.nodeOptions;
+            return nodeOptions.prefix + id;
         },
         _addNodes: function (nodes, options) {
             if (!$.isArray(nodes)) {
@@ -377,17 +391,14 @@
                 me._addNode(node, options);
             });
         },
-        _addConnects: function (connects, type) {
+        _addConnections: function (connects) {
             if (!$.isArray(connects)) {
                 connects = [connects];
             }
             var me = this;
             $.each(connects, function (index, item) {
-                me._addConnect(item, type);
+                me._addConnection(item);
             });
-        },
-        _getNodeEl: function () {
-
         },
         nodeData: function (idx) {
             return this._nodeCache[idx];
@@ -410,11 +421,13 @@
             }
         },
         render: function (data) {
-            var drawData = this._parseData(data);
-
-            this._addNodes(drawData.nodes);
-
-            this._addConnects(drawData.connects);
+            if(data == null) return;
+            this.empty();
+            var me = this;
+            this.instance.batch(function () {
+                me._addNodes(data.nodes);
+                me._addConnections(data.connections);
+            });
         },
         select: function () {
             var $active = $(this.element).find('.wf-node-active');
@@ -429,6 +442,9 @@
         },
         data: function () {
             return this._nodeCache;
+        },
+        empty: function(){
+            this.instance.empty();
         },
         destroy: function () {
 

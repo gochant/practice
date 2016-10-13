@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <title></title>
-    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-    <link href="bower_components/tinyui/dist/css/bootstrap.css" rel="stylesheet" />
-    <link href="bower_components/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="bower_components/tinyui/dist/css/tiny.css" rel="stylesheet" />
-    <link href="src/css/yutflow.css" rel="stylesheet" />
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+    <link href="bower_components/tinyui/dist/css/bootstrap.css" rel="stylesheet"/>
+    <link href="bower_components/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <link href="bower_components/tinyui/dist/css/tiny.css" rel="stylesheet"/>
+    <link href="src/css/yutflow.css" rel="stylesheet"/>
     <style>
         #workflow {
             position: relative;
@@ -24,118 +24,162 @@
     </style>
 </head>
 <body>
-    <div id="workflow"></div>
-    <div id="context-menu"></div>
-    <div id="toolbar">
-        <button class="btn btn-default" id="btn-select">获取选中</button>
-        <button class="btn btn-default" id="btn-data">获取数据</button>
+<div id="workflow"></div>
+<div id="context-menu"></div>
+<div id="toolbar">
+    <button class="btn btn-default" id="btn-select">获取选中</button>
+    <button class="btn btn-default" id="btn-data">获取数据</button>
 
-    </div>
+</div>
 
-    <script type="text/template" id="tpl-canvas-menu">
-        <ul class="dropdown-menu" role="menu">
-            <li>
-                <a href="#" data-action="addNode">
-                    <i class="fa fa-plus fa-fw"></i>
-                    添加步骤
-                </a>
-            </li>
-            <li>
-                <a href="#" data-action="reload">
-                    <i class="fa fa-refresh fa-fw"></i>
-                    重新加载
-                </a>
-            </li>
-            <li>
-                <a href="#" data-action="save">
-                    <i class="fa fa-save fa-fw"></i>
-                    保存流程
-                </a>
-            </li>
-        </ul>
-    </script>
-    <script type="text/template" id="tpl-node-menu">
-        <ul class="dropdown-menu" role="menu">
-            <li>
-                <a href="#" data-action="addNode">
-                    <i class="fa fa-cog fa-fw"></i>
-                    基本信息
-                </a>
-            </li>
-            <li>
-                <a href="#" data-action="reload">
-                    <i class="fa fa-th fa-fw"></i>
-                    表单字段
-                </a>
-            </li>
-            <li>
-                <a href="#" data-action="save">
-                    <i class="fa fa-user fa-fw"></i>
-                    经办角色
-                </a>
-            </li>
-            <li>
-                <a href="#" data-action="save">
-                    <i class="fa fa-share fa-fw"></i>
-                    转出条件
-                </a>
-            </li>
-            <li role="separator" class="divider"></li>
-            <li>
-                <a href="#" data-action="deleteNode">
-                    <i class="fa fa-trash fa-fw"></i>
-                    删除步骤
-                </a>
-            </li>
-        </ul>
-    </script>
-    <script type="text/template" id="tpl-node">
-        <div class="<%= cls %>"
-             id="<%= prefix %><%= index %>"
-             data-id="<%= id %>"
-             style="top: <%= top %>px; left: <%= left %>px;">
+<script type="text/template" id="tpl-canvas-menu">
+    <ul class="dropdown-menu" role="menu">
+        <li>
+            <a href="#" data-action="addNode">
+                <i class="fa fa-plus fa-fw"></i>
+                添加步骤
+            </a>
+        </li>
+        <li>
+            <a href="#" data-action="reload">
+                <i class="fa fa-refresh fa-fw"></i>
+                重新加载
+            </a>
+        </li>
+        <li>
+            <a href="#" data-action="save">
+                <i class="fa fa-save fa-fw"></i>
+                保存流程
+            </a>
+        </li>
+    </ul>
+</script>
+<script type="text/template" id="tpl-node-menu">
+    <ul class="dropdown-menu" role="menu">
+        <li>
+            <a href="#" data-action="addNode">
+                <i class="fa fa-cog fa-fw"></i>
+                基本信息
+            </a>
+        </li>
+        <li>
+            <a href="#" data-action="reload">
+                <i class="fa fa-th fa-fw"></i>
+                表单字段
+            </a>
+        </li>
+        <li>
+            <a href="#" data-action="save">
+                <i class="fa fa-user fa-fw"></i>
+                经办角色
+            </a>
+        </li>
+        <li>
+            <a href="#" data-action="save">
+                <i class="fa fa-share fa-fw"></i>
+                转出条件
+            </a>
+        </li>
+        <li role="separator" class="divider"></li>
+        <li>
+            <a href="#" data-action="deleteNode">
+                <i class="fa fa-trash fa-fw"></i>
+                删除步骤
+            </a>
+        </li>
+    </ul>
+</script>
+<script type="text/template" id="tpl-node">
+    <div class="<%= cls %>"
+         id="<%= prefix %><%= index %>"
+         data-id="<%= id %>"
+         style="top: <%= top %>px; left: <%= left %>px;">
             <span class="wf-handle">
                 <i></i>
                 <%= index %>
             </span>
-            <span class="wf-node_text">
+        <span class="wf-node_text">
                 <%= name %>
             </span>
-        </div>
-    </script>
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/underscore/underscore.js"></script>
-    <script src="bower_components/bootstrap-contextmenu/bootstrap-contextmenu.js"></script>
-    <script src="bower_components/jsplumb/dist/js/jsPlumb-2.0.7.js"></script>
-    <script src="src/js/yutflow.js"></script>
-    <script>
+    </div>
+</script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/underscore/underscore.js"></script>
+<script src="bower_components/bootstrap-contextmenu/bootstrap-contextmenu.js"></script>
+<script src="bower_components/jsplumb/dist/js/jsPlumb-2.0.7.js"></script>
+<script src="src/js/yutflow.js"></script>
+<script>
 
-        var data = [{
-            "id": 222, "processid": 3, "left": "484", "top": "245", "name": "\u6d4b\u8bd53", "to": "0"
+    var data = {
+        nodes: [{
+            id: 220,
+            index: 1,
+            left: "200",
+            top: "167",
+            name: "测试",
+            state: 'done'
         }, {
-            "id": 221, "processid": 2, "left": "420", "top": "53", "name": "\u6d4b\u8bd52", "to": "3,0"
+            id: 221,
+            index: 2,
+            left: "420",
+            top: "53",
+            name: "测试2",
+            state: 'progress'
         }, {
-            "id": 220, "processid": 1, "left": "200", "top": "167", "name": "\u6d4b\u8bd5", "to": "2"
+            id: 222,
+            index: 3,
+            left: "484",
+            top: "245",
+            name: "测试3",
+            state: 'pending'
         }, {
-            "id": 191, "processid": 0, "left": "771", "top": "88", "name": "\u7ed3\u675f", "to": ""
+            id: 190,
+            index: 0,
+            left: "79",
+            top: "60",
+            name: "开始",
+            state: 'done'
         }, {
-            "id": 190, "processid": -1, "left": "79", "top": "60", "name": "\u5f00\u59cb", "to": "1"
-        }];
+            id: 191,
+            index: -1,
+            left: "771",
+            top: "88",
+            name: "结束",
+            state: 'pending'
+        }],
+        connections: [{
+            source: 0,
+            target: 1
+        },{
+            source: 1,
+            target: 2
+        }, {
+            source: 2,
+            target: 3,
+            text: '审核通过'
+        }, {
+            source: 2,
+            target: -1,
+            text: '审核不通过'
+        }, {
+            source: 3,
+            target: -1,
+            text: '呵呵哒'
+        }]
+    };
 
-        $('#workflow').yutflow({
-            data: data,
-            editable: false,
-            draggable: false,
-            contextMenu: false
-        });
-        $('#btn-select').on('click', function () {
-            var data = $('#workflow').data('plugin_yutflow').select();
-            console.log(data);
-        });
-        $('#btn-data').on('click', function () {
-            var data = $('#workflow').data('plugin_yutflow').data();
-            console.log(data);
-        });
-    </script>
+    $('#workflow').yutflow({
+        data: data,
+        editable: true
+    });
+    $('#btn-select').on('click', function () {
+        var data = $('#workflow').data('plugin_yutflow').select();
+        console.log(data);
+    });
+    $('#btn-data').on('click', function () {
+        var data = $('#workflow').data('plugin_yutflow').data();
+        console.log(data);
+    });
+</script>
 </body>
 </html>
