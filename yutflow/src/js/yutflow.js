@@ -37,12 +37,13 @@
         editable: false,
         draggable: false,
         selectable: false,
-        onNodeClick: function(){ },
+        onNodeClick: function () {
+        },
         onConnection: function (info, wf) {
             var conn = info.connection;
             var $target = $(info.target);
-            var data = wf.nodeData(wf.idx($target));
-            if(data){
+            var data = wf.getNodeData(wf.idx($target));
+            if (data) {
                 if (data.state === 'done' || data.state === 'progress') {
                     conn.toggleType("done");
                 }
@@ -91,7 +92,10 @@
         // 属性
 
         // 数据缓存
-        this._nodeCache = {}; // 节点缓存
+        this._data = {
+            nodes: [],
+            connections: []
+        };
 
         this.init();
     }
@@ -127,7 +131,7 @@
                 // EndpointStyle:{ fillStyle:"transparent" },
                 // EndpointHoverStyle:{ fillStyle:"#ffa500" },
 
-                Connector: ["Flowchart", { gap: 2 }],
+                Connector: ["Flowchart", {gap: 2}],
                 ConnectionsDetachable: false,
                 ReattachConnections: false,
 
@@ -197,6 +201,7 @@
 
             instance.bind("connectionDetached", function (con) {
                 if (con && con.connection) {
+                    console.log(con);
                     debugger;
                 }
             });
@@ -219,7 +224,7 @@
 
             $container.on('click', normalStepSelector, $.proxy(options.onNodeClick, this));
 
-            if(options.selectable){
+            if (options.selectable) {
                 // click select
                 $container.on('click', normalStepSelector, function (e) {
                     console.log('click!!');
@@ -291,8 +296,8 @@
         },
         _getMaxIndex: function () {
             var max = 0;
-            var data = this._nodeCache;
-            $.each(data, function (i, item) {
+            var nodes = this._data.nodes;
+            $.each(nodes, function (i, item) {
                 max = Math.max(max, item.index);
             });
 
@@ -324,7 +329,7 @@
 
             // state 4种状态：'pending', 'progress', 'done', 'none'
 
-            if(data.state){
+            if (data.state) {
                 data.cls += ' ' + data.state;
             }
 
@@ -346,8 +351,6 @@
             if (data.isTarget !== false) {
                 instance.makeTarget($nodeEl, data.targetOptions);
             }
-
-            this._nodeCache[data.index] = data;
 
             return $nodeEl;
         },
@@ -400,30 +403,53 @@
                 me._addConnection(item);
             });
         },
-        nodeData: function (idx) {
-            return this._nodeCache[idx];
+        getNodeData: function (idx) {
+            return _.find(this._data.nodes, function (node) {
+                return node.index === idx;
+            });
+        },
+        addConnectionData: function () {
+
+        },
+        removeConnectionData: function () {
+
+        },
+        removeNodeData: function (idx) {
+            var i = _.findIndex(this._data.nodes, function (node) {
+                return node.index === idx;
+            });
+            this._data.nodes.splice(i, 1);
+        },
+        addNode: function(options){
+            this._addNode({
+                id: new Date().getTime(),  // TODO: 这里的id应该是外部传进来，而不是自己随便设置的一个
+                top: options.top,
+                left: options.left,
+            });
+        },
+        removeNode: function ($node) {
+            $node && this.instance.remove($node);
+            var idx = this.idx($node);
+            this.removeNodeData(idx);
         },
         _addNodeHandler: function (e) {
             var containerOffset = this.$container.offset();
             var currentOffset = $(e.currentTarget).offset();
-
-            this._addNode({
-                id: new Date().getTime(),  // TODO: 这里的id应该是外部传进来，而不是自己随便设置的一个
+            this.addNode({
                 top: currentOffset.top - containerOffset.top,
-                left: currentOffset.left - containerOffset.left,
+                left: currentOffset.left - containerOffset.left
             });
         },
         _deleteNodeHandler: function (e, $node) {
             if (window.confirm('确认删除该步骤？')) {
-                $node && this.instance.remove($node);
-                var idx = this.idx($node);
-                delete this._nodeCache[idx];
+                this.removeNode($node);
             }
         },
         render: function (data) {
-            if(data == null) return;
+            if (data == null) return;
             this.empty();
             var me = this;
+            this._data = data;
             this.instance.batch(function () {
                 me._addNodes(data.nodes);
                 me._addConnections(data.connections);
@@ -432,7 +458,7 @@
         select: function () {
             var $active = $(this.element).find('.wf-node-active');
             var idx = this.idx($active);
-            return this.nodeData(idx);
+            return this.getNodeData(idx);
         },
         idx: function ($node) {
             var prefix = this.settings.nodeOptions.prefix;
@@ -443,7 +469,7 @@
         data: function () {
             return this._nodeCache;
         },
-        empty: function(){
+        empty: function () {
             this.instance.empty();
         },
         destroy: function () {
