@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RxJS</title>
+
+</head>
+<body>
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../bower_components/rxjs/dist/rx.lite.js"></script>
+<script src="../node_modules/eventemitter2/lib/eventemitter2.js"></script>
+<!--<script src="part1.js"></script>-->
+<script>
+    var source = Rx.Observable.range(1, 5);
+    var subscription = source.subscribe(
+        x => console.log('onNext: ' + x),
+        e => console.log('onError: ' + e.message),
+        () => console.log('onCompleted')
+    );
+
+    var mediator = new EventEmitter2({
+        wildcard: true
+    });
+    mediator.on('root.p1.d.**.done', function(argument){
+        console.log('d:' + argument);
+    })
+    mediator.on('root.p1.**.done', function(argument){
+        console.log('p1:' + argument);
+    })
+    mediator.on('root.p1.c.**.done', function(argument){
+        console.log('c:' + argument);
+    })
+    mediator.on('root.p1.c.c1.**.done', function(argument){
+        console.log('c1:' + argument);
+    })
+    mediator.on('root.p1.c.c2.**.done', function(argument){
+        console.log('c2:' + argument);
+    })
+//'root.p1.p2.c.c1.c2.*.done'
+//
+//    this.sub('done', function(){
+//
+//    });
+</script>
+</body>
+</html>
