@@ -1,0 +1,43 @@
+﻿@margin-xs-length: 10px;
+@margin-sm-length: @margin-xs-length * 2;
+@margin-md-length: @margin-xs-length * 4;
+@margin-lg-length: @margin-xs-length * 8;
+@shadow-color: #eee;
+
+.box-shadow(@len, @color) {
+    box-shadow: 0 0 0 @len @color;
+}
+
+
+body {
+    margin: 0;
+}
+
+.body {
+    border: 1px solid #333;
+}
+
+.mg-xs {
+    margin: @margin-xs-length 0;
+    .box-shadow(@margin-xs-length, @shadow-color);
+}
+
+.mg-sm {
+    margin: @margin-sm-length 0;
+    .box-shadow(@margin-xs-length, darken(@shadow-color, 10%));
+}
+
+.mg-md {
+    margin: @margin-md-length 0;
+    .box-shadow(@margin-xs-length, darken(@shadow-color, 20%));
+}
+
+.mg-lg {
+    margin: @margin-lg-length 0;
+    .box-shadow(@margin-xs-length, darken(@shadow-color, 30%));
+}
+
+.float {
+    float: left;
+    .box-shadow(@margin-xs-length, darken(@shadow-color, 40%));
+}

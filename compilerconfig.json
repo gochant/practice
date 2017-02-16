@@ -1,0 +1,10 @@
+﻿[
+  {
+    "outputFile": "css22/index.css",
+    "inputFile": "css22/index.less"
+  },
+  {
+    "outputFile": "css22/paper-bills.css",
+    "inputFile": "css22/paper-bills.less"
+  }
+]

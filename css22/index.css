@@ -1,0 +1,26 @@
+﻿body {
+  margin: 0;
+}
+.body {
+  border: 1px solid #333;
+}
+.mg-xs {
+  margin: 10px 0;
+  box-shadow: 0 0 0 10px #eee;
+}
+.mg-sm {
+  margin: 20px 0;
+  box-shadow: 0 0 0 10px #d5d5d5;
+}
+.mg-md {
+  margin: 40px 0;
+  box-shadow: 0 0 0 10px #bbbbbb;
+}
+.mg-lg {
+  margin: 80px 0;
+  box-shadow: 0 0 0 10px #a2a2a2;
+}
+.float {
+  float: left;
+  box-shadow: 0 0 0 10px #888888;
+}
