@@ -1,26 +1,55 @@
 <template>
-  <div>
-    <span class="test">Test it {{ msg }}</span>
-    <el-radio class="radio" v-model="radio" label="1">备选项</el-radio>
-    <el-radio class="radio" v-model="radio" label="2">备选项</el-radio>
-  </div>
+  <el-row class="tac">
+    <el-col :span="8">
+      <div style="margin-bottom: 20px;">
+        <el-button size="small" @click="addTab">
+          add tab
+        </el-button>
+      </div>
+      <el-tabs type="border-card" closable :active-name="activeTab">
+        <el-tab-pane v-for="(item, index) in tabs" :label="item.title" :name="item.name">
+          <component :is="item.content"></component>
+        </el-tab-pane>
+      </el-tabs>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
+  import Hello from 'components/Hello'
+  import Hello2 from 'components/Hello2'
+
   export default {
-    name: 'hello',
+    name: 'test',
     data () {
       return {
-        msg: 'Test msg',
-        radio: '1'
+        tabs: [{
+          name: '1',
+          title: 'HEHE',
+          content: 'hello'
+        }],
+        activeTab: '1'
+      }
+    },
+    components: {
+      Hello,
+      Hello2
+    },
+    methods: {
+      addTab () {
+        this.tabs.push({
+          name: '2',
+          title: 'new Tab',
+          content: 'hello2'
+        })
+        this.activeTab = (parseInt(this.activeTab) + 1).toString()
+      },
+      handleOpen (key, keyPath) {
+        console.log(key, keyPath)
+      },
+      handleClose (key, keyPath) {
+        console.log(key, keyPath)
       }
     }
   }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-  .test {
-    background-color: red;
-  }
-</style>
