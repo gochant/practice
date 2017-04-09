@@ -1,6 +1,5 @@
 node_modules
 .idea
-test
 bower_components
 npm-debug.log
 .nyc_output
