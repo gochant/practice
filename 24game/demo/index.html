@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>24 Game</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            background: #2f2f2f;
+            color: #c6c6c6;
+        }
+
+        main {
+            width: 260px;
+            height: 500px;
+        }
+
+        h2 {
+            font-family: 'Open Sans', 'serif';
+            color: #fff;
+            text-align: center;
+            border-bottom: 1px solid #121212;
+            box-shadow: rgba(255, 255, 255, 0.07) 0 1px 0;
+        }
+
+        h2 strong {
+            color: #dadbb1;
+            text-shadow: 0 0 .1em, 0 0 .3em;
+        }
+
+        content {
+            text-align: center;
+            background: #202020;
+            background-color: rgba(0, 0, 0, 0.3);
+            box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.8) 0 1px 7px 0px inset;
+        }
+
+        form {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        input {
+            box-sizing: border-box;
+            color: white;
+            width: 3rem;
+            height: 3rem;
+            font-size: 1rem;
+            text-align: center;
+            border: 0;
+            margin: 0;
+            background: #202020;
+            background-color: rgba(0, 0, 0, 0.3);
+            box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.8) 0 1px 7px 0px inset;
+        }
+
+        button {
+            box-sizing: border-box;
+            outline: 0;
+            font-size: 1.5em;
+            font-family: cursive;
+            color: #fb292d;
+            border-radius: 1px;
+            width: 3rem;
+            height: 3rem;
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.06);
+            transition: background .5s, color .5s;
+            cursor: pointer;
+        }
+
+        button:hover {
+            color: #eee;
+            background: #fb292d;
+        }
+
+        textarea {
+            box-sizing: border-box;
+            display: block;
+            width: 100%;
+            border: 0;
+            color: #c6c6c6;
+            resize: none;
+            margin: 20px 0;
+            padding: 10px;
+            text-align: left;
+            letter-spacing: 3px;
+            line-height: 1.5;
+            font-family: "Consolas", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            box-shadow: rgba(255, 255, 255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.8) 0 1px 7px 0px inset;
+            background: #202020;
+            background-color: rgba(0, 0, 0, 0.3);
+            min-height: 200px;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <h2 class="title">24 Game <strong>Solver</strong></h2>
+    <content>
+        <form action="">
+            <input type="text" name="val1" autofocus placeholder="0">
+            <input type="text" name="val2" placeholder="0">
+            <input type="text" name="val3" placeholder="0">
+            <input type="text" name="val4" placeholder="0">
+            <button id="ok">→</button>
+        </form>
+        <textarea id="result" placeholder="there is solution" disabled>
+        </textarea>
+    </content>
+
+</main>
+
+<script src="../src/core.js"></script>
+<script>
+    const engine = new The24Game
+    document.getElementById('ok').addEventListener('click', (e)=> {
+        e.preventDefault()
+        const vals = Array.from(document.querySelectorAll('input'))
+                .map(input => parseInt(input.value.trim())).filter(val => !Number.isNaN(val))
+        const ret = engine.solve(vals).join('\n')
+        document.getElementById('result').value = ret === '' ? '无解' : ret
+    })
+
+</script>
+</body>
+</html>
