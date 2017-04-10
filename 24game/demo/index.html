@@ -107,8 +107,7 @@
             <input type="text" name="val4" placeholder="0">
             <button id="ok">→</button>
         </form>
-        <textarea id="result" placeholder="there is solution" disabled>
-        </textarea>
+        <textarea id="result" placeholder="there is solution" disabled></textarea>
     </content>
 
 </main>
@@ -116,11 +115,17 @@
 <script src="../src/core.js"></script>
 <script>
     const engine = new The24Game
+    const optimizeEngine = new The24Game({
+        optimizeBracket: true
+    })
+    const advanceEngine = new The24Game({
+        target: 30
+    })
     document.getElementById('ok').addEventListener('click', (e)=> {
         e.preventDefault()
         const vals = Array.from(document.querySelectorAll('input'))
                 .map(input => parseInt(input.value.trim())).filter(val => !Number.isNaN(val))
-        const ret = engine.solve(vals).join('\n')
+        const ret = engine.solve(...vals).join('\n')
         document.getElementById('result').value = ret === '' ? '无解' : ret
     })
 

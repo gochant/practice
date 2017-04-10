@@ -9,13 +9,13 @@
     const placeholders = {'+': 'plus', '-': 'minus', '*': 'times', '/': 'divide'}
 
     /**
-     * 24 游戏解决器
+     * 24 游戏解法器
      */
     class The24Game {
         /**
          *
          * @param {number} [target=24] - 目标数字
-         * @param {boolean} [optimizeBracket=false] - 是否优化括号
+         * @param {boolean} [optimizeBracket=false] - 是否优化掉不必要的括号
          */
         constructor({target = 24, optimizeBracket = false} = {}) {
             // 目标数字
@@ -33,7 +33,7 @@
          * @example
          *   new The24Game().solve([5, 5, 6, 6])
          */
-        solve(arr) {
+        solve(...arr) {
             if(arr.length === 0) return []
             arr.sort()
             const cacheKey = arr.toString()
@@ -63,7 +63,7 @@
             }
 
             const ret = intermediates[intermediates.length - 1]
-                .filter(item => item.val === this.target)
+                .filter(item => Math.abs(item.val - this.target) < Number.EPSILON)
                 .map(item => item.exp).sort()
                 // 去重
                 .filter((item, k, arr) => k === 0 || item !== arr[k - 1])
